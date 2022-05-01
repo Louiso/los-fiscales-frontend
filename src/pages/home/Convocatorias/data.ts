@@ -20,6 +20,8 @@ const convocatorias: Convocatoria[] = [
       {
         _id: "1",
         nombres: "LUIS MARTIN SOLANO PEREZ",
+        convocatoriaTotal: 599,
+        proyectoIrregularTotal: 20,
         presuntaIrregularidades: [
           {
             etiqueta: "Penal",
@@ -90,6 +92,8 @@ const convocatorias: Convocatoria[] = [
       {
         _id: "2",
         nombres: "ATILIO BRUNO JORGE VARGAS",
+        convocatoriaTotal: 599,
+        proyectoIrregularTotal: 20,
         presuntaIrregularidades: [
           {
             etiqueta: "Penal",

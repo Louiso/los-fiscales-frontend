@@ -13,9 +13,12 @@ const Convocatorias: FC = () => {
         fullWidth
         placeholder="Nombre de convocatoria"
       />
-      <Box sx={{pt: 1.5}}>
+      <Box sx={{ pt: 1.5 }}>
         {convocatorias.map((convocatoria) => (
-          <ConvocatoriaCard key={convocatoria._id} convocatoria={convocatoria} />
+          <ConvocatoriaCard
+            key={convocatoria._id}
+            convocatoria={convocatoria}
+          />
         ))}
       </Box>
     </div>

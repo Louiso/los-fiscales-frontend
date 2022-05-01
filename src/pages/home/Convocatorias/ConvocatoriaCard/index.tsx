@@ -19,7 +19,7 @@ const ConvocatoriaCard: FC<ConvocatoriaCardProps> = ({ convocatoria }) => {
       />
       <CardContent>
         {convocatoria.miembros.map((miembro) => (
-          <MiembroConvocatoriaCard key={miembro._id} miembro={miembro}/>
+          <MiembroConvocatoriaCard key={miembro._id} miembro={miembro} />
         ))}
       </CardContent>
     </Card>

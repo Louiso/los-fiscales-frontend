@@ -7,6 +7,8 @@ export type PresuntaIrregularidad = {
 export type MiembroConvocatoria = {
   _id: string;
   nombres: string;
+  convocatoriaTotal: number;
+  proyectoIrregularTotal: number;
   presuntaIrregularidades: PresuntaIrregularidad[];
   relacionIrregulares: {
     _id: string;

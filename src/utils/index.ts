@@ -4,5 +4,5 @@ export function capitalize(word: string): string {
 }
 
 export function capitalizeSentence(sentence: string): string {
-  return sentence.split(' ').map(capitalize).join(' ');
+  return sentence.split(" ").map(capitalize).join(" ");
 }
