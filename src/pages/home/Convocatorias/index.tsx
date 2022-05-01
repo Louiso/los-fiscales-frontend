@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import React, { FC } from "react";
 import ConvocatoriaCard from "./ConvocatoriaCard";
 import { convocatorias } from "./data";
@@ -13,9 +13,11 @@ const Convocatorias: FC = () => {
         fullWidth
         placeholder="Nombre de convocatoria"
       />
-      {convocatorias.map((convocatoria) => (
-        <ConvocatoriaCard key={convocatoria._id} convocatoria={convocatoria} />
-      ))}
+      <Box sx={{pt: 1.5}}>
+        {convocatorias.map((convocatoria) => (
+          <ConvocatoriaCard key={convocatoria._id} convocatoria={convocatoria} />
+        ))}
+      </Box>
     </div>
   );
 };

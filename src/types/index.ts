@@ -8,17 +8,15 @@ export type MiembroConvocatoria = {
   _id: string;
   nombres: string;
   presuntaIrregularidades: PresuntaIrregularidad[];
-  relacionIrregulares: [
-    {
-      _id: string;
-      nombres: string;
-      dni: string;
-      proyectosTotal: number;
-      presuntaIrregularidades: PresuntaIrregularidad[];
-      grado: number;
-      // links donde es tiene presuntas irregularidades
-    }
-  ];
+  relacionIrregulares: {
+    _id: string;
+    nombres: string;
+    dni: string;
+    proyectosTotal: number;
+    presuntaIrregularidades: PresuntaIrregularidad[];
+    grado: number;
+    // links donde es tiene presuntas irregularidades
+  }[];
 };
 
 export type UnitMeasure = "UNIDAD" | "SERVICIO";

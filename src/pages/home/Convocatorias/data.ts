@@ -16,57 +16,110 @@ const convocatorias: Convocatoria[] = [
       nombre: "MUNICIPALIDAD DISTRITAL DE HUACACHI",
       tipo: "GOBIERNO LOCAL"
     },
-    miembros: [{
-      _id: "1",
-      nombres: 'LUIS MARTIN SOLANO PEREZ',
-      presuntaIrregularidades: [{
-        etiqueta: 'Penal',
-        total: 20,
-        valor: 'penal'
-      }],
-      relacionIrregulares: [{
-        _id: '1',
-        dni: '43092869',
-        nombres: 'ROBERT HUGO RODRIGUEZ HUAYANEY',
-        presuntaIrregularidades: [{
-          etiqueta: 'Penal',
-          total: 100,
-          valor: 'penal'
-        },
-        {
-          etiqueta: 'Civil',
-          total: 50,
-          valor: 'civil'
-        }],
-        grado: 100,
-        proyectosTotal: 300
-      }]
-    },{
-      _id: "2",
-      nombres: 'ATILIO BRUNO JORGE VARGAS',
-      presuntaIrregularidades: [{
-        etiqueta: 'Penal',
-        total: 30,
-        valor: 'penal'
-      }],
-      relacionIrregulares: [{
-        _id: '1',
-        dni: '43092869',
-        nombres: 'ROBERT HUGO RODRIGUEZ HUAYANEY',
-        presuntaIrregularidades: [{
-          etiqueta: 'Penal',
-          total: 100,
-          valor: 'penal'
-        },
-        {
-          etiqueta: 'Civil',
-          total: 50,
-          valor: 'civil'
-        }],
-        grado: 100,
-        proyectosTotal: 300
-      }]
-    }],
+    miembros: [
+      {
+        _id: "1",
+        nombres: "LUIS MARTIN SOLANO PEREZ",
+        presuntaIrregularidades: [
+          {
+            etiqueta: "Penal",
+            total: 20,
+            valor: "penal"
+          }
+        ],
+        relacionIrregulares: [
+          {
+            _id: "1",
+            dni: "43092869",
+            nombres: "ROBERT HUGO RODRIGUEZ HUAYANEY",
+            presuntaIrregularidades: [
+              {
+                etiqueta: "Penal",
+                total: 100,
+                valor: "penal"
+              },
+              {
+                etiqueta: "Civil",
+                total: 50,
+                valor: "civil"
+              }
+            ],
+            grado: 100,
+            proyectosTotal: 300
+          },
+          {
+            _id: "2",
+            dni: "43092870",
+            nombres: "ROBERT HUGO RODRIGUEZ HUAYANEY 2",
+            presuntaIrregularidades: [
+              {
+                etiqueta: "Penal",
+                total: 100,
+                valor: "penal"
+              },
+              {
+                etiqueta: "Civil",
+                total: 50,
+                valor: "civil"
+              }
+            ],
+            grado: 100,
+            proyectosTotal: 300
+          },
+          {
+            _id: "3",
+            dni: "43092878",
+            nombres: "ROBERT HUGO RODRIGUEZ",
+            presuntaIrregularidades: [
+              {
+                etiqueta: "Penal",
+                total: 100,
+                valor: "penal"
+              },
+              {
+                etiqueta: "Civil",
+                total: 50,
+                valor: "civil"
+              }
+            ],
+            grado: 100,
+            proyectosTotal: 300
+          }
+        ]
+      },
+      {
+        _id: "2",
+        nombres: "ATILIO BRUNO JORGE VARGAS",
+        presuntaIrregularidades: [
+          {
+            etiqueta: "Penal",
+            total: 30,
+            valor: "penal"
+          }
+        ],
+        relacionIrregulares: [
+          {
+            _id: "1",
+            dni: "43092869",
+            nombres: "ROBERT HUGO RODRIGUEZ HUAYANEY",
+            presuntaIrregularidades: [
+              {
+                etiqueta: "Penal",
+                total: 100,
+                valor: "penal"
+              },
+              {
+                etiqueta: "Civil",
+                total: 50,
+                valor: "civil"
+              }
+            ],
+            grado: 100,
+            proyectosTotal: 300
+          }
+        ]
+      }
+    ],
     codigo: "774991",
     descripcionProceso:
       "EJECUCIÓN DE IOARR: REMODELACION DE PLAZOLETA; EN EL(LA) CENTRO POBLADO DE OCOCOCHA  DISTRITO DE HUACACHI, PROVINCIA HUARI, DEPARTAMENTO ANCASH",

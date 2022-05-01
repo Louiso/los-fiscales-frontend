@@ -1,4 +1,3 @@
-
 https://doc.contraloria.gob.pe/documentos/PREGUNTAS_FRECUENTES_PAS.pdf
 ¿Cuándo incurren los servidores y funcionarios públicos en responsabilidad administrativa
 funcional, responsabilidad civil y responsabilidad penal?
@@ -14,16 +13,16 @@ La 9na disposición final de la Ley N° 27785 - Ley Orgánica del Sistema Nacion
 Contraloría General de la República, define las responsabilidades administrativa funcional, civil y
 penal:
 
-  - Responsabilidad Administrativa Funcional.- Algo malo pasa y se le tiene q hechar culpa al responsable de la entidad(Culpabilidad indirecta).
+- Responsabilidad Administrativa Funcional.- Algo malo pasa y se le tiene q hechar culpa al responsable de la entidad(Culpabilidad indirecta).
 
-  - Responsabilidad Civil.- Daño económico a su Entidad o al Estado, incumpliendo sus funciones, por dolo o culpa. La obligación del
+- Responsabilidad Civil.- Daño económico a su Entidad o al Estado, incumpliendo sus funciones, por dolo o culpa. La obligación del
   resarcimiento es de carácter contractual y solidaria, y la acción correspondiente prescribe a los
   diez (10) años de ocurridos los hechos que generan el daño económico.
 
-  - Responsabilidad Penal.- Han efectuado un acto u omisión tipificado como delito.
+- Responsabilidad Penal.- Han efectuado un acto u omisión tipificado como delito.
 
-  Responsabilidad Administrativa Ent:
+Responsabilidad Administrativa Ent:
 
 https://www.gob.pe/8647-direccion-de-fiscalizacion-y-aplicacion-de-incentivos-procedimiento-administrativo-sancionador
-  Responsabilidad Administrativa PAS:
-    El procedimiento administrativo sancionador (PAS) inicia con la notificación de la resolución de imputación de cargos al funcionario investigado, la cual contiene una descripción de los actos u omisiones que pudieran constituir infracciones administrativas, las normas que tipifican dichos actos y las sanciones que corresponde imponer.
+Responsabilidad Administrativa PAS:
+El procedimiento administrativo sancionador (PAS) inicia con la notificación de la resolución de imputación de cargos al funcionario investigado, la cual contiene una descripción de los actos u omisiones que pudieran constituir infracciones administrativas, las normas que tipifican dichos actos y las sanciones que corresponde imponer.
