@@ -4,7 +4,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "types": ["vite/client", "jest"],
     "allowJs": false,
-    "skipLibCheck": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -15,7 +14,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "skipLibCheck": true
   },
-  "include": ["./src", "./setup-tests.ts"]
+  "include": ["./src", "./setup-tests.ts"],
+  "exclude": [
+    "./node_modules",
+  ]
 }
