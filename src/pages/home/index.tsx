@@ -1,12 +1,22 @@
 import React, { FC } from "react";
-import { AppBar, Button, Container, CssBaseline, Grid, IconButton, TextField, Toolbar, Typography } from '@mui/material'
-import { Announcement, Menu as MenuIcon } from '@mui/icons-material'
+import {
+  AppBar,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  IconButton,
+  TextField,
+  Toolbar,
+  Typography
+} from "@mui/material";
+import { Announcement, Menu as MenuIcon } from "@mui/icons-material";
 import Announcements from "./Convocatorias";
 
 const HomePage: FC = () => {
   return (
     <div>
-      <CssBaseline/>
+      <CssBaseline />
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -27,7 +37,7 @@ const HomePage: FC = () => {
       <Container>
         <Grid container>
           <Grid item xs={8}>
-            <Announcements/>
+            <Announcements />
           </Grid>
           <Grid item xs={4}>
             Ranking
@@ -36,6 +46,6 @@ const HomePage: FC = () => {
       </Container>
     </div>
   );
-}
+};
 
 export default HomePage;
