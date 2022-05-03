@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Convocatoria } from "types";
 import dayjs from "dayjs";
 import { capitalize } from "utils";
-import MiembroConvocatoriaCard from "./MiembroConvocatoria";
+import MiembroConvocatoriaCard from "components/MiembroConvocatoriaPanel";
 
 interface ConvocatoriaCardProps {
   convocatoria: Convocatoria;

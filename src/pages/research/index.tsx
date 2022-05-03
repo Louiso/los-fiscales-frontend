@@ -1,23 +1,21 @@
 import React, { FC } from "react";
 import {
   AppBar,
-  Button,
   Container,
-  CssBaseline,
   Grid,
   IconButton,
-  TextField,
   Toolbar,
   Typography
 } from "@mui/material";
-import { Announcement, Menu as MenuIcon } from "@mui/icons-material";
-import Announcements from "./Convocatorias";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import { Outlet } from "react-router-dom";
+
+import AsideMetrics from './AsideMetrics'
 
 const HomePage: FC = () => {
   return (
     <div>
-      <CssBaseline />
-      <AppBar position="static">
+      <AppBar position="static" sx={{backgroundColor: 'primary'}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -29,18 +27,18 @@ const HomePage: FC = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Los Fiscales
           </Typography>
-          <Button color="inherit">Login</Button>
+          {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
       <Container>
-        <Grid container>
+        <Grid container spacing={1}>
           <Grid item xs={8}>
-            <Announcements />
+            <Outlet/>
           </Grid>
           <Grid item xs={4}>
-            Ranking
+            <AsideMetrics/>
           </Grid>
         </Grid>
       </Container>

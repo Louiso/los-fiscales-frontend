@@ -3,7 +3,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Paper,
   Typography
 } from "@mui/material";
 import React, { FC } from "react";
@@ -14,14 +13,17 @@ import {
   ResponsabilidadSrcIconParser,
   ResponsabilidadSrcIconParserKey
 } from "utils/parsers";
-import { ExpandMore as ExpandMoreIcon, Launch as LaunchIcon } from "@mui/icons-material";
+import {
+  ExpandMore as ExpandMoreIcon,
+} from "@mui/icons-material";
 import MaybeTooltip from "components/MaybeTooltip";
+import IrregularCard from "components/IrregularCard";
 
-interface MiembroConvocatoriaProps {
+interface MiembroConvocatoriaPanelProps {
   miembro: MiembroConvocatoria;
 }
 
-const MiembroConvocatoriaCard: FC<MiembroConvocatoriaProps> = ({ miembro }) => {
+const MiembroConvocatoriaPanel: FC<MiembroConvocatoriaPanelProps> = ({ miembro }) => {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -35,6 +37,8 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaProps> = ({ miembro }) => {
             <MaybeTooltip title={capitalizeSentence(miembro.nombres)}>
               <Typography
                 sx={{
+                  color: 'grey.700',
+                  fontWeight: 'bold',
                   overflow: "hidden",
                   whiteSpace: "nowrap",
                   textOverflow: "ellipsis"
@@ -72,10 +76,11 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaProps> = ({ miembro }) => {
       </AccordionSummary>
       <AccordionDetails>
         <Typography variant="body2" component="div" sx={{ mt: 1 }}>
-          Numero de convocatorias: {miembro.convocatoriaTotal}
+          Numero de convocatorias:&nbsp;{miembro.convocatoriaTotal}
         </Typography>
         <Typography variant="body2" component="div">
-          Numero de proyectos con presuntas irregularidades: {miembro.proyectoIrregularTotal}
+          Numero de proyectos con presuntas irregularidades:&nbsp;
+          {miembro.proyectoIrregularTotal}
         </Typography>
         <Box
           sx={{
@@ -86,58 +91,7 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaProps> = ({ miembro }) => {
           }}
         >
           {miembro.relacionIrregulares.map((irregular) => (
-            <Paper
-              variant="outlined"
-              key={irregular._id}
-              sx={{
-                p: 1.5,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
-            >
-              <Box display='flex' alignItems='baseline'>
-                <div>
-                  <Typography>{capitalizeSentence(irregular.nombres)}</Typography>
-                  <Typography variant="caption" component="div" sx={{ mt: 1 }}>
-                    Dni: {irregular.dni}
-                  </Typography>
-                  <Typography variant="caption" component="div">
-                    Grado: {irregular.grado}
-                  </Typography>
-                  <Typography variant="caption" component="div">
-                    Total de proyectos: {irregular.proyectosTotal}
-                  </Typography>
-                </div>
-                <LaunchIcon fontSize="small"/>
-              </Box>
-              <Box display="flex" sx={{ mt: 1 }}>
-                {irregular.presuntaIrregularidades.map((irregularidad) => (
-                  <Box
-                    key={irregularidad.valor}
-                    display="flex"
-                    alignItems="center"
-                    sx={{ mr: 1 }}
-                  >
-                    <img
-                      style={{
-                        width: 24,
-                        height: 24
-                      }}
-                      src={
-                        ResponsabilidadSrcIconParser[
-                          irregularidad.valor as ResponsabilidadSrcIconParserKey
-                        ]
-                      }
-                    />
-                    &nbsp;&nbsp;
-                    <Typography variant="caption">
-                      {irregularidad.total}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-            </Paper>
+            <IrregularCard key={irregular._id} irregular={irregular} />
           ))}
         </Box>
       </AccordionDetails>
@@ -145,4 +99,4 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaProps> = ({ miembro }) => {
   );
 };
 
-export default MiembroConvocatoriaCard;
+export default MiembroConvocatoriaPanel;

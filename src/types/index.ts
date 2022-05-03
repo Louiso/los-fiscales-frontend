@@ -4,21 +4,23 @@ export type PresuntaIrregularidad = {
   total: number;
 };
 
+export type Irregular = {
+  _id: string;
+  nombres: string;
+  dni: string;
+  proyectosTotal: number;
+  presuntaIrregularidades: PresuntaIrregularidad[];
+  grado: number;
+  // links donde es tiene presuntas irregularidades
+}
+
 export type MiembroConvocatoria = {
   _id: string;
   nombres: string;
   convocatoriaTotal: number;
   proyectoIrregularTotal: number;
   presuntaIrregularidades: PresuntaIrregularidad[];
-  relacionIrregulares: {
-    _id: string;
-    nombres: string;
-    dni: string;
-    proyectosTotal: number;
-    presuntaIrregularidades: PresuntaIrregularidad[];
-    grado: number;
-    // links donde es tiene presuntas irregularidades
-  }[];
+  relacionIrregulares: Irregular[];
 };
 
 export type UnitMeasure = "UNIDAD" | "SERVICIO";
