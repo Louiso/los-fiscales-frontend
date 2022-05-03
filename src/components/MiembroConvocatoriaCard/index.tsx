@@ -1,10 +1,4 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Typography
-} from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { MiembroConvocatoria } from "types";
 import { capitalizeSentence } from "utils";
@@ -19,16 +13,18 @@ interface MiembroConvocatoriaCardProps {
   miembro: MiembroConvocatoria;
 }
 
-const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({ miembro }) => {
+const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
+  miembro
+}) => {
   return (
     <Card>
-      <CardHeader 
-        title={(
+      <CardHeader
+        title={
           <MaybeTooltip title={capitalizeSentence(miembro.nombres)}>
             <Typography
               sx={{
-                color: 'grey.700',
-                fontWeight: 'bold',
+                color: "grey.700",
+                fontWeight: "bold",
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis"
@@ -37,7 +33,7 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({ miembro }) 
               {capitalizeSentence(miembro.nombres)}
             </Typography>
           </MaybeTooltip>
-        )}
+        }
         action={miembro.presuntaIrregularidades.map((irregularidad) => (
           <Box
             key={irregularidad.valor}
@@ -59,7 +55,8 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({ miembro }) 
             &nbsp;&nbsp;
             <Typography variant="caption">{irregularidad.total}</Typography>
           </Box>
-        ))}/>
+        ))}
+      />
       <CardContent>
         <Typography variant="body2" component="div" sx={{ mt: 1 }}>
           N° convocatorias:&nbsp;{miembro.convocatoriaTotal}

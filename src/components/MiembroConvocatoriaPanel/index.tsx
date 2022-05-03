@@ -13,9 +13,7 @@ import {
   ResponsabilidadSrcIconParser,
   ResponsabilidadSrcIconParserKey
 } from "utils/parsers";
-import {
-  ExpandMore as ExpandMoreIcon,
-} from "@mui/icons-material";
+import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import MaybeTooltip from "components/MaybeTooltip";
 import IrregularCard from "components/IrregularCard";
 
@@ -23,7 +21,9 @@ interface MiembroConvocatoriaPanelProps {
   miembro: MiembroConvocatoria;
 }
 
-const MiembroConvocatoriaPanel: FC<MiembroConvocatoriaPanelProps> = ({ miembro }) => {
+const MiembroConvocatoriaPanel: FC<MiembroConvocatoriaPanelProps> = ({
+  miembro
+}) => {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -37,8 +37,8 @@ const MiembroConvocatoriaPanel: FC<MiembroConvocatoriaPanelProps> = ({ miembro }
             <MaybeTooltip title={capitalizeSentence(miembro.nombres)}>
               <Typography
                 sx={{
-                  color: 'grey.700',
-                  fontWeight: 'bold',
+                  color: "grey.700",
+                  fontWeight: "bold",
                   overflow: "hidden",
                   whiteSpace: "nowrap",
                   textOverflow: "ellipsis"

@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import "index.css";
 import Root from "routes";
 import { ThemeProvider } from "@mui/material";
-import theme from 'config/theme'
+import theme from "config/theme";
 
 ReactDOM.render(
   <React.StrictMode>

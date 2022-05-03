@@ -10,12 +10,12 @@ import {
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { Outlet } from "react-router-dom";
 
-import AsideMetrics from './AsideMetrics'
+import AsideMetrics from "./AsideMetrics";
 
 const HomePage: FC = () => {
   return (
     <div>
-      <AppBar position="static" sx={{backgroundColor: 'primary'}}>
+      <AppBar position="static" sx={{ backgroundColor: "primary" }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -35,10 +35,10 @@ const HomePage: FC = () => {
       <Container>
         <Grid container spacing={1}>
           <Grid item xs={8}>
-            <Outlet/>
+            <Outlet />
           </Grid>
           <Grid item xs={4}>
-            <AsideMetrics/>
+            <AsideMetrics />
           </Grid>
         </Grid>
       </Container>

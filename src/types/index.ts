@@ -12,7 +12,7 @@ export type Irregular = {
   presuntaIrregularidades: PresuntaIrregularidad[];
   grado: number;
   // links donde es tiene presuntas irregularidades
-}
+};
 
 export type MiembroConvocatoria = {
   _id: string;

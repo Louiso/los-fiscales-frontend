@@ -1,4 +1,4 @@
-// ranking de presuntas responsabilidades, deseable por 
+// ranking de presuntas responsabilidades, deseable por
 
 // cuales son los funcionarios que han participado en la mayor cantidad de procesos de seleccion
 // cuantos estos funcionarios han sido encontrados con responsabilidad

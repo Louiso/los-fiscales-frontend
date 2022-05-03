@@ -113,6 +113,6 @@ const miembros: MiembroConvocatoria[] = [
       }
     ]
   }
-]
+];
 
 export { miembros };

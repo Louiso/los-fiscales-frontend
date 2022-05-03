@@ -1,19 +1,20 @@
-import { Box, Paper, Typography } from '@mui/material';
-import React, { FC } from 'react'
-import { Irregular } from 'types';
-import { capitalizeSentence } from 'utils';
-import qs from 'query-string'
+import { Box, Paper, Typography } from "@mui/material";
+import React, { FC } from "react";
+import { Irregular } from "types";
+import { capitalizeSentence } from "utils";
+import qs from "query-string";
+import { Launch as LaunchIcon } from "@mui/icons-material";
 import {
-  Launch as LaunchIcon
-} from "@mui/icons-material";
-import { ResponsabilidadSrcIconParser, ResponsabilidadSrcIconParserKey } from 'utils/parsers';
-import { Link } from 'react-router-dom';
+  ResponsabilidadSrcIconParser,
+  ResponsabilidadSrcIconParserKey
+} from "utils/parsers";
+import { Link } from "react-router-dom";
 
 interface IrregularCardProps {
   irregular: Irregular;
 }
 
-const IrregularCard: FC<IrregularCardProps> = ({irregular}) => {
+const IrregularCard: FC<IrregularCardProps> = ({ irregular }) => {
   return (
     <Paper
       variant="outlined"
@@ -26,18 +27,32 @@ const IrregularCard: FC<IrregularCardProps> = ({irregular}) => {
       }}
     >
       <div>
-        <Box display="flex" alignItems="baseline" justifyContent='space-between' width='100%'>
-          <Typography variant='body2' sx={{
-            color: 'grey.700',
-            fontWeight: 'bold',
-          }}>
+        <Box
+          display="flex"
+          alignItems="baseline"
+          justifyContent="space-between"
+          width="100%"
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              color: "grey.700",
+              fontWeight: "bold"
+            }}
+          >
             {capitalizeSentence(irregular.nombres)}
           </Typography>
-          <Box position='relative' width={28} height={16}>
-            <Link target='_blank' to={`/irregular?${qs.stringify({
-              dni: irregular.dni
-            })}`}>
-              <LaunchIcon fontSize="small" sx={{position: 'absolute', top: 0}}/>
+          <Box position="relative" width={28} height={16}>
+            <Link
+              target="_blank"
+              to={`/irregular?${qs.stringify({
+                dni: irregular.dni
+              })}`}
+            >
+              <LaunchIcon
+                fontSize="small"
+                sx={{ position: "absolute", top: 0 }}
+              />
             </Link>
           </Box>
         </Box>
@@ -71,14 +86,12 @@ const IrregularCard: FC<IrregularCardProps> = ({irregular}) => {
               }
             />
             &nbsp;&nbsp;
-            <Typography variant="caption">
-              {irregularidad.total}
-            </Typography>
+            <Typography variant="caption">{irregularidad.total}</Typography>
           </Box>
         ))}
       </Box>
     </Paper>
-  )
-}
+  );
+};
 
-export default IrregularCard
+export default IrregularCard;
