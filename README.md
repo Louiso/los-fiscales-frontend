@@ -26,3 +26,16 @@ Some helpful scripts:
 - `checkup`: run `typecheck`, `format`, and `lint` in succession
 - `build`: build the project
 - `serve`: preview the built project
+
+// scripts
+"commit:cz": "cz",
+
+// de los packages
+"commitizen": "^4.2.4",
+
+// se saco del package.json
+"config": {
+"commitizen": {
+"path": "./node_modules/cz-conventional-changelog"
+}
+},

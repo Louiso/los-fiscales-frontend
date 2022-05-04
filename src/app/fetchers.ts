@@ -1,5 +1,5 @@
 import serverFrontendAPI from "./mock/serverFrontendAPI";
-import state from './state'
+import state from "./state";
 
 interface FetcherArgs {
   query?: string;
@@ -9,26 +9,38 @@ interface FetcherArgs {
   data?: any;
 }
 
-const fetcher = ({ query, mutation, key, data, variables }: FetcherArgs): Promise<any> => {
-  if(key) return data ?? state[key]
+const fetcher = ({
+  query,
+  mutation,
+  key,
+  data,
+  variables
+}: FetcherArgs): Promise<any> => {
+  if (key) return data ?? state[key];
 
   if (!serverFrontendAPI[query ?? mutation ?? ""])
     return Promise.reject(new Error("Method not found"));
 
-  return data ?? serverFrontendAPI[query ?? mutation ?? ""]({
-    variables
-  });
+  return (
+    data ??
+    serverFrontendAPI[query ?? mutation ?? ""]({
+      variables
+    })
+  );
 };
 
 function serialize(useSWRNext: any) {
-  return (key: any, fetcher:any, config: any) => {
+  return (key: any, fetcher: any, config: any) => {
     // Serialize the key.
-    const serializedKey = JSON.stringify(key)
+    const serializedKey = JSON.stringify(key);
 
     // Pass the serialized key, and unserialize it in fetcher.
-    return useSWRNext(serializedKey, (k: any) => fetcher(JSON.parse(k)), config)
-  }
+    return useSWRNext(
+      serializedKey,
+      (k: any) => fetcher(JSON.parse(k)),
+      config
+    );
+  };
 }
-
 
 export { fetcher, serialize };

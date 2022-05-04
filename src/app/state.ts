@@ -1,10 +1,10 @@
-import { SortByMemberOptionKey } from "utils/constants"
+import { SortByMemberOptionKey } from "utils/constants";
 
 const state: Record<string, any> = {
   getSearchState: {
-    search: '',
+    search: "",
     sortBy: SortByMemberOptionKey.PreRespPenal
   }
-}
+};
 
-export default state
+export default state;

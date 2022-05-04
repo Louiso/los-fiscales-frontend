@@ -23,7 +23,7 @@ const Miembros: FC = () => {
     }
   });
 
-  if(!miembros) return <div>Cargando...</div>;
+  if (!miembros) return <div>Cargando...</div>;
 
   return (
     <div>
@@ -55,11 +55,11 @@ const Miembros: FC = () => {
             }}
             label="Ordenar por:"
             // onChange={handleChange}
-          > 
+          >
             {SortByMemberOptions.map((option) => (
               <MenuItem value={option.value} key={option.value}>
-              {option.label}
-            </MenuItem>
+                {option.label}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

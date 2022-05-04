@@ -11,7 +11,6 @@ import { SWRConfig } from "swr";
 import "app/mock/serverFrontendAPI";
 import { fetcher, serialize } from "app/fetchers";
 
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -22,7 +21,7 @@ ReactDOM.render(
             provider: () => new Map(),
             fetcher,
             revalidateOnFocus: false,
-            use: [serialize],
+            use: [serialize]
           }}
         >
           <Root />
