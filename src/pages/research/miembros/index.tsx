@@ -8,16 +8,22 @@ import {
 } from "@mui/material";
 import MiembroConvocatoriaCard from "components/MiembroConvocatoriaCard";
 import React, { FC } from "react";
-import { useGetMiembros } from "../services";
+import { SortByMemberOptions } from "utils/constants";
+import { useGetMiembros, useSearchState } from "../services";
 // import ConvocatoriaCard from "./ConvocatoriaCard";
 
 const Miembros: FC = () => {
+  const { data: searchState } = useSearchState();
+
   const { data: miembros } = useGetMiembros({
     variables: {
       page: 0,
-      search: ""
+      search: searchState?.search,
+      sortBy: searchState?.sortBy
     }
   });
+
+  if(!miembros) return <div>Cargando...</div>;
 
   return (
     <div>
@@ -30,6 +36,7 @@ const Miembros: FC = () => {
       >
         <TextField
           fullWidth
+          value={searchState?.search}
           InputProps={{
             sx: {
               backgroundColor: "white"
@@ -42,21 +49,18 @@ const Miembros: FC = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={"pre-resp-penal"}
+            value={searchState?.sortBy}
             sx={{
               backgroundColor: "white"
             }}
             label="Ordenar por:"
             // onChange={handleChange}
-          >
-            <MenuItem value="pre-resp-penal">Presunta Resp. Penal</MenuItem>
-            <MenuItem value="pre-resp-administrativa">
-              Presunta Resp. Administrativa
+          > 
+            {SortByMemberOptions.map((option) => (
+              <MenuItem value={option.value} key={option.value}>
+              {option.label}
             </MenuItem>
-            <MenuItem value="pre-resp-total">Presunta Resp. Total</MenuItem>
-            <MenuItem value="fre-part-conv">
-              Frecuente Partición en Convocatorias
-            </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>

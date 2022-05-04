@@ -9,6 +9,8 @@ import theme from "config/theme";
 import { SWRConfig } from "swr";
 
 import "app/mock/serverFrontendAPI";
+import { fetcher, serialize } from "app/fetchers";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,8 +20,9 @@ ReactDOM.render(
           value={{
             // refreshInterval: 3000,
             provider: () => new Map(),
-            fetcher: (resource, init) =>
-              fetch(resource, init).then((res) => res.json())
+            fetcher,
+            revalidateOnFocus: false,
+            use: [serialize],
           }}
         >
           <Root />
