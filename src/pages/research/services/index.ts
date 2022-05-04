@@ -27,3 +27,4 @@ export const useSearchState = () =>
   useSWR<Search>({
     key: "getSearchState"
   });
+  

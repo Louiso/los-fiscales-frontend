@@ -6,23 +6,22 @@ interface FetcherArgs {
   mutation?: string;
   variables: any;
   key?: string;
-  data?: any;
+  // data?: any;
 }
 
 const fetcher = ({
   query,
   mutation,
   key,
-  data,
+  // data,
   variables
 }: FetcherArgs): Promise<any> => {
-  if (key) return data ?? state[key];
+  if (key) return state[key];
 
   if (!serverFrontendAPI[query ?? mutation ?? ""])
     return Promise.reject(new Error("Method not found"));
 
   return (
-    data ??
     serverFrontendAPI[query ?? mutation ?? ""]({
       variables
     })

@@ -7016,6 +7016,11 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
+use-debounce@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-8.0.0.tgz#fd8d24858dd0d1986bb9a45af4d0aa6ce99226d2"
+  integrity sha512-rKavD/3NxRR8MnCBhcS+TiBEqLQHEFRPjm/MYKYZsRE8Z8u1einvgqRKcBTNkt4SfIXfYZNTJe3YSDBC+Vhz5g==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"

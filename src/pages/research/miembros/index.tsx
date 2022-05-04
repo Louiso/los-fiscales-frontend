@@ -7,23 +7,39 @@ import {
   TextField
 } from "@mui/material";
 import MiembroConvocatoriaCard from "components/MiembroConvocatoriaCard";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
+import { useSWRConfig } from "swr";
 import { SortByMemberOptions } from "utils/constants";
 import { useGetMiembros, useSearchState } from "../services";
 // import ConvocatoriaCard from "./ConvocatoriaCard";
+import { useDebounce } from 'use-debounce'
 
 const Miembros: FC = () => {
+  const config = useSWRConfig()
+
   const { data: searchState } = useSearchState();
+
+  const [searchTextDebounce] = useDebounce(searchState?.search ?? '', 500)
 
   const { data: miembros } = useGetMiembros({
     variables: {
       page: 0,
-      search: searchState?.search,
+      search: searchTextDebounce,
       sortBy: searchState?.sortBy
     }
   });
 
-  if (!miembros) return <div>Cargando...</div>;
+  const _handleChange = ({target: { value, name }}: any) => {
+    console.log("_handleChange")
+    config.mutate(JSON.stringify({
+      key: 'getSearchState',
+    }), (resp: any) => {
+      return {
+        ...resp,
+        [name]: value
+      }
+    }, false)
+  }
 
   return (
     <div>
@@ -36,6 +52,8 @@ const Miembros: FC = () => {
       >
         <TextField
           fullWidth
+          onChange={_handleChange}
+          name="search"
           value={searchState?.search}
           InputProps={{
             sx: {
@@ -46,22 +64,25 @@ const Miembros: FC = () => {
         />
         <FormControl sx={{ ml: 1, width: 320 }}>
           <InputLabel id="demo-simple-select-label">Ordenar por:</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={searchState?.sortBy}
-            sx={{
-              backgroundColor: "white"
-            }}
-            label="Ordenar por:"
-            // onChange={handleChange}
-          >
-            {SortByMemberOptions.map((option) => (
-              <MenuItem value={option.value} key={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
+          {searchState?.sortBy && (
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              name="sortBy"
+              value={searchState?.sortBy}
+              onChange={_handleChange}
+              sx={{
+                backgroundColor: "white"
+              }}
+              label="Ordenar por:"
+            >
+              {SortByMemberOptions.map((option) => (
+                <MenuItem value={option.value} key={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
         </FormControl>
       </Box>
       <Box
@@ -72,7 +93,7 @@ const Miembros: FC = () => {
           gridGap: "12px"
         }}
       >
-        {miembros.map((miembro) => (
+        {(miembros ?? []).map((miembro) => (
           <MiembroConvocatoriaCard key={miembro._id} miembro={miembro} />
         ))}
       </Box>
