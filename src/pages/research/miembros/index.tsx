@@ -7,7 +7,7 @@ import {
   TextField
 } from "@mui/material";
 import MiembroConvocatoriaCard from "components/MiembroConvocatoriaCard";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { useSWRConfig } from "swr";
 import { SortByMemberOptions } from "utils/constants";
 import { useGetMiembros, useSearchState } from "../services";
