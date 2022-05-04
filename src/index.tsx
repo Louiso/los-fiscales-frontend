@@ -8,7 +8,7 @@ import { ThemeProvider } from "@mui/material";
 import theme from "config/theme";
 import { SWRConfig } from "swr";
 
-import 'app/mock/serverFrontendAPI'
+import "app/mock/serverFrontendAPI";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +18,8 @@ ReactDOM.render(
           value={{
             // refreshInterval: 3000,
             provider: () => new Map(),
-            fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+            fetcher: (resource, init) =>
+              fetch(resource, init).then((res) => res.json())
           }}
         >
           <Root />

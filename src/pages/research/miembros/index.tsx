@@ -15,9 +15,9 @@ const Miembros: FC = () => {
   const { data: miembros } = useGetMiembros({
     variables: {
       page: 0,
-      search: ''
+      search: ""
     }
-  })
+  });
 
   return (
     <div>
