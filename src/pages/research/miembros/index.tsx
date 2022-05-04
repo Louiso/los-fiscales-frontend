@@ -8,10 +8,17 @@ import {
 } from "@mui/material";
 import MiembroConvocatoriaCard from "components/MiembroConvocatoriaCard";
 import React, { FC } from "react";
+import { useGetMiembros } from "../services";
 // import ConvocatoriaCard from "./ConvocatoriaCard";
-import { miembros } from "./data";
 
 const Miembros: FC = () => {
+  const { data: miembros } = useGetMiembros({
+    variables: {
+      page: 0,
+      search: ''
+    }
+  })
+
   return (
     <div>
       <Box
