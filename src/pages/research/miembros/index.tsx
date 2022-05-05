@@ -113,7 +113,7 @@ const Miembros: FC = () => {
               backgroundColor: "white"
             }
           }}
-          placeholder="DNI/Nombres de Funcionario"
+          placeholder="Nombres de Funcionario"
         />
         <FormControl sx={{ ml: 1, width: 320 }}>
           <InputLabel id="demo-simple-select-label">Ordenar por:</InputLabel>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosMock from "./axios";
+import axiosMock from "./utils/axios";
 import serverBackendAPI from "./serverBackendAPI";
 
 const getInstance = () => {

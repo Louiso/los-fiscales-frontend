@@ -1,4 +1,4 @@
-import { miembros } from "./data";
+import { miembros } from "./utils/data";
 
 export interface Req {
   params: any;
