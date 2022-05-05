@@ -9,7 +9,7 @@ export type Irregular = {
   nombres: string;
   dni: string;
   proyectosTotal: number;
-  presuntaIrregularidades: PresuntaIrregularidad[];
+  presuntasIrregularidades: PresuntaIrregularidad[];
   grado: number;
   // links donde es tiene presuntas irregularidades
 };
@@ -19,8 +19,9 @@ export type MiembroConvocatoria = {
   nombres: string;
   convocatoriaTotal: number;
   proyectoIrregularTotal: number;
-  presuntaIrregularidades: PresuntaIrregularidad[];
-  relacionIrregulares: Irregular[];
+  presuntasIrregularidades: PresuntaIrregularidad[];
+  relacionesIrregulares: Irregular[];
+  ultimasConvocatorias?: Convocatoria[];
 };
 
 export type UnitMeasure = "UNIDAD" | "SERVICIO";
@@ -31,7 +32,7 @@ export type Item = {
   _id: string;
   total: number;
   descripcion: string;
-  medidadUnidad: UnitMeasure;
+  medidaUnidad: UnitMeasure;
   estado: ItemStatus;
   esPaquete: boolean;
   codigo: string;

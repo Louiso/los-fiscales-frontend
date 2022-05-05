@@ -59,6 +59,11 @@ const theme = createTheme({
     secondary: {
       main: secondary[500]
     }
+  },
+  typography: {
+    h6: {
+      fontSize: 14,
+    }
   }
 });
 

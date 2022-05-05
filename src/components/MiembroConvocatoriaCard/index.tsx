@@ -8,6 +8,7 @@ import {
 } from "utils/parsers";
 import MaybeTooltip from "components/MaybeTooltip";
 import IrregularCard from "components/IrregularCard";
+import ConvocatoriaCard from "components/ConvocatoriaCard";
 
 interface MiembroConvocatoriaCardProps {
   miembro: MiembroConvocatoria;
@@ -34,7 +35,7 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
             </Typography>
           </MaybeTooltip>
         }
-        action={miembro.presuntaIrregularidades.map((irregularidad) => (
+        action={miembro.presuntasIrregularidades.map((irregularidad) => (
           <Box
             key={irregularidad.valor}
             display="flex"
@@ -70,6 +71,23 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
         <Paper variant="outlined">
 
         </Paper> */}
+        {Boolean(miembro.ultimasConvocatorias && miembro.ultimasConvocatorias.length) && (
+          <>
+            <Typography variant="body2" component="div" sx={{ mt: 1 }}>Ultimas convocatorias:</Typography>
+            <Box
+              sx={{
+                display: "grid",
+                mt: 1.5,
+                gridTemplateColumns: "1fr",
+                gridGap: "8px"
+              }}
+            >
+              {miembro.ultimasConvocatorias!.map((convocatoria) => (
+                <ConvocatoriaCard key={convocatoria._id} convocatoria={convocatoria} />
+              ))}
+            </Box>
+          </>
+        )}
         <Box
           sx={{
             display: "grid",
@@ -78,7 +96,7 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
             gridGap: "8px"
           }}
         >
-          {miembro.relacionIrregulares.map((irregular) => (
+          {miembro.relacionesIrregulares.map((irregular) => (
             <IrregularCard key={irregular._id} irregular={irregular} />
           ))}
         </Box>

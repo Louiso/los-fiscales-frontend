@@ -49,7 +49,7 @@ const MiembroConvocatoriaPanel: FC<MiembroConvocatoriaPanelProps> = ({
             </MaybeTooltip>
           </Box>
           <Box>
-            {miembro.presuntaIrregularidades.map((irregularidad) => (
+            {miembro.presuntasIrregularidades.map((irregularidad) => (
               <Box
                 key={irregularidad.valor}
                 display="flex"
@@ -90,7 +90,7 @@ const MiembroConvocatoriaPanel: FC<MiembroConvocatoriaPanelProps> = ({
             gridGap: "8px"
           }}
         >
-          {miembro.relacionIrregulares.map((irregular) => (
+          {miembro.relacionesIrregulares.map((irregular) => (
             <IrregularCard key={irregular._id} irregular={irregular} />
           ))}
         </Box>

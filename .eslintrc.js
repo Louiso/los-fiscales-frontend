@@ -20,6 +20,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "react-hooks"],
   rules: {
     "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   settings: {
     react: {

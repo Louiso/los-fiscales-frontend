@@ -67,7 +67,7 @@ const IrregularCard: FC<IrregularCardProps> = ({ irregular }) => {
         </Typography>
       </div>
       <Box display="flex" sx={{ mt: 1 }}>
-        {irregular.presuntaIrregularidades.map((irregularidad) => (
+        {irregular.presuntasIrregularidades.map((irregularidad) => (
           <Box
             key={irregularidad.valor}
             display="flex"

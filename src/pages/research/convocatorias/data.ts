@@ -22,19 +22,19 @@ const convocatorias: Convocatoria[] = [
         nombres: "LUIS MARTIN SOLANO PEREZ",
         convocatoriaTotal: 599,
         proyectoIrregularTotal: 20,
-        presuntaIrregularidades: [
+        presuntasIrregularidades: [
           {
             etiqueta: "Penal",
             total: 20,
             valor: "penal"
           }
         ],
-        relacionIrregulares: [
+        relacionesIrregulares: [
           {
             _id: "1",
             dni: "43092869",
             nombres: "ROBERT HUGO RODRIGUEZ HUAYANEY",
-            presuntaIrregularidades: [
+            presuntasIrregularidades: [
               {
                 etiqueta: "Penal",
                 total: 100,
@@ -53,7 +53,7 @@ const convocatorias: Convocatoria[] = [
             _id: "2",
             dni: "43092870",
             nombres: "ROBERT HUGO RODRIGUEZ HUAYANEY 2",
-            presuntaIrregularidades: [
+            presuntasIrregularidades: [
               {
                 etiqueta: "Penal",
                 total: 100,
@@ -72,7 +72,7 @@ const convocatorias: Convocatoria[] = [
             _id: "3",
             dni: "43092878",
             nombres: "ROBERT HUGO RODRIGUEZ",
-            presuntaIrregularidades: [
+            presuntasIrregularidades: [
               {
                 etiqueta: "Penal",
                 total: 100,
@@ -94,19 +94,19 @@ const convocatorias: Convocatoria[] = [
         nombres: "ATILIO BRUNO JORGE VARGAS",
         convocatoriaTotal: 599,
         proyectoIrregularTotal: 20,
-        presuntaIrregularidades: [
+        presuntasIrregularidades: [
           {
             etiqueta: "Penal",
             total: 30,
             valor: "penal"
           }
         ],
-        relacionIrregulares: [
+        relacionesIrregulares: [
           {
             _id: "1",
             dni: "43092869",
             nombres: "ROBERT HUGO RODRIGUEZ HUAYANEY",
-            presuntaIrregularidades: [
+            presuntasIrregularidades: [
               {
                 etiqueta: "Penal",
                 total: 100,
@@ -144,7 +144,7 @@ const convocatorias: Convocatoria[] = [
         "EJECUCI¿N DE IOARR: REMODELACION DE PLAZOLETA; EN EL(LA) CENTRO POBLADO DE OCOCOCHA  DISTRITO DE HUACACHI, PROVINCIA HUARI, DEPARTAMENTO ANCASH",
       esPaquete: false,
       estado: "CONSENTIDO",
-      medidadUnidad: "UNIDAD",
+      medidaUnidad: "UNIDAD",
       moneda: "PEN",
       referencialMonto: 132481.33,
       total: 1
