@@ -9,7 +9,14 @@ export interface Req {
 const serverBackendAPI: Record<string, any | any[]> = {
   "GET /api/members": ({ query }: Req) => {
     console.log("query", query);
-    return miembros;
+    return {
+      info: {
+        totalDocs: 3,
+        page: 1,
+        hasNextPage: true
+      },
+      docs: miembros
+    };
   },
   "POST /api/members/add": ({ body }: Req) => {
     console.log("body", body);

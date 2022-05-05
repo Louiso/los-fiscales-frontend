@@ -18,7 +18,9 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
-  rules: {},
+  rules: {
+    "react-hooks/exhaustive-deps": "warn",
+  },
   settings: {
     react: {
       version: "detect"

@@ -10,9 +10,20 @@ interface UseGetMiembrosArgs {
   };
 }
 
+interface Info {
+  totalDocs: number;
+  page: number;
+  hasNextPage: number;
+}
+
+type Pagination<T> = {
+  info: Info;
+  docs: T[];
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useGetMiembros = (args: UseGetMiembrosArgs) =>
-  useSWR<MiembroConvocatoria[]>({
+  useSWR<Pagination<MiembroConvocatoria>>({
     query: "getMembers",
     variables: args.variables
   });

@@ -4,41 +4,94 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  // TablePagination,
   TextField
 } from "@mui/material";
 import MiembroConvocatoriaCard from "components/MiembroConvocatoriaCard";
-import React, { FC } from "react";
-import { useSWRConfig } from "swr";
-import { SortByMemberOptions } from "utils/constants";
-import { useGetMiembros, useSearchState } from "../services";
+import React, { FC, useMemo } from "react";
+// import { useSWRConfig } from "swr";
+import { SortByMemberOptionKey, SortByMemberOptions } from "utils/constants";
+import { useGetMiembros } from "../services";
+import qs from 'query-string'
 // import ConvocatoriaCard from "./ConvocatoriaCard";
 import { useDebounce } from 'use-debounce'
+import { useLocation, useNavigate } from "react-router-dom";
+import BoardPagination from "components/BoardPagination";
+
+interface QueryParams {
+  q: string; // search query
+  sortBy: string; // sort by
+  page: string; // page number
+  limit: string; // limit
+}
+
+const ParseNameToQueryArg: Record<string, string> = {
+  search: 'q',
+  sortBy: 'sortBy',
+  page: 'page',
+  limit: 'limit'
+}
 
 const Miembros: FC = () => {
-  const config = useSWRConfig()
+  // const config = useSWRConfig()
+  const location = useLocation()
+  const navigation = useNavigate()
 
-  const { data: searchState } = useSearchState();
+  // const { data: searchState } = useSearchState();
+  const queryParams = useMemo(() => {
+    const params: QueryParams = qs.parse(location.search) as any
 
-  const [searchTextDebounce] = useDebounce(searchState?.search ?? '', 500)
+    return {
+      search: params.q || '',
+      sortBy: params.sortBy || SortByMemberOptionKey.PreRespPenal,
+      page: params.page && !isNaN(Number(params.page)) ? Math.max(1, Number(params.page)) : 1,
+      limit: Number(params.limit || 15),
+    }
+  }, [location.search])
 
-  const { data: miembros } = useGetMiembros({
+  const [searchTextDebounce] = useDebounce(queryParams.search ?? '', 500)
+
+  const getMiembrosQuery = useGetMiembros({
     variables: {
       page: 0,
       search: searchTextDebounce,
-      sortBy: searchState?.sortBy
+      sortBy: queryParams?.sortBy
     }
   });
 
   const _handleChange = ({target: { value, name }}: any) => {
-    console.log("_handleChange")
-    config.mutate(JSON.stringify({
-      key: 'getSearchState',
-    }), (resp: any) => {
-      return {
-        ...resp,
-        [name]: value
-      }
-    }, false)
+    navigation({
+      search: qs.stringify({
+        ...qs.parse(location.search),
+        [ParseNameToQueryArg[name]]: value
+      })
+    })
+  }
+
+  const { info, docs: miembros } = useMemo(() => {
+    if (!getMiembrosQuery.data) return { info: null, docs: [] }
+
+    const { info, docs } = getMiembrosQuery.data
+    return { info, docs }
+  }, [getMiembrosQuery])
+
+  const _handleChangePage = (newPage: number) => {
+    navigation({
+      search: qs.stringify({
+        ...qs.parse(location.search),
+        page: newPage && !isNaN(Number(newPage)) ? Math.max(1, Number(newPage)) : 1
+      })
+    })
+  }
+
+  const _handleChangeRowsPerPage = (newRowsPerPage: number) => {
+    navigation({
+      search: qs.stringify({
+        ...qs.parse(location.search),
+        limit: newRowsPerPage,
+        page: 1
+      })
+    })
   }
 
   return (
@@ -54,7 +107,7 @@ const Miembros: FC = () => {
           fullWidth
           onChange={_handleChange}
           name="search"
-          value={searchState?.search}
+          value={queryParams?.search}
           InputProps={{
             sx: {
               backgroundColor: "white"
@@ -64,12 +117,12 @@ const Miembros: FC = () => {
         />
         <FormControl sx={{ ml: 1, width: 320 }}>
           <InputLabel id="demo-simple-select-label">Ordenar por:</InputLabel>
-          {searchState?.sortBy && (
+          {queryParams?.sortBy && (
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               name="sortBy"
-              value={searchState?.sortBy}
+              value={queryParams?.sortBy}
               onChange={_handleChange}
               sx={{
                 backgroundColor: "white"
@@ -85,6 +138,15 @@ const Miembros: FC = () => {
           )}
         </FormControl>
       </Box>
+      <BoardPagination
+        rowsPerPageOptions={[15, 30, 50]}
+        count={miembros.length}
+        totalDocs={info?.totalDocs ?? 0}
+        rowsPerPage={queryParams.limit}
+        page={queryParams.page}
+        onPageChange={_handleChangePage}
+        onRowsPerPageChange={_handleChangeRowsPerPage}
+        />
       <Box
         sx={{
           pt: 1.5,
@@ -97,6 +159,15 @@ const Miembros: FC = () => {
           <MiembroConvocatoriaCard key={miembro._id} miembro={miembro} />
         ))}
       </Box>
+      <BoardPagination
+        rowsPerPageOptions={[15, 30, 50]}
+        count={miembros.length}
+        totalDocs={info?.totalDocs ?? 0}
+        rowsPerPage={queryParams.limit}
+        page={queryParams.page}
+        onPageChange={_handleChangePage}
+        onRowsPerPageChange={_handleChangeRowsPerPage}
+        />
     </div>
   );
 };
