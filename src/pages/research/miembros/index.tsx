@@ -141,6 +141,9 @@ const Miembros: FC = () => {
       <BoardPagination
         rowsPerPageOptions={[15, 30, 50]}
         count={miembros.length}
+        sx={{
+          mt: 1
+        }}
         totalDocs={info?.totalDocs ?? 0}
         rowsPerPage={queryParams.limit}
         page={queryParams.page}
@@ -160,6 +163,9 @@ const Miembros: FC = () => {
         ))}
       </Box>
       <BoardPagination
+        sx={{
+          mt: 1
+        }}
         rowsPerPageOptions={[15, 30, 50]}
         count={miembros.length}
         totalDocs={info?.totalDocs ?? 0}

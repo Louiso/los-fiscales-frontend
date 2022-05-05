@@ -10,9 +10,10 @@ interface BoardPaginationProps {
   totalDocs: number;
   onPageChange: (page: number) => void;
   onRowsPerPageChange: (rowsPerPage: number) => void;
+  sx?: any;
 }
 
-const BoardPagination: FC<BoardPaginationProps> = ({rowsPerPageOptions, rowsPerPage, onRowsPerPageChange, onPageChange, page, totalDocs}) => {
+const BoardPagination: FC<BoardPaginationProps> = ({rowsPerPageOptions, rowsPerPage, onRowsPerPageChange, onPageChange, page, totalDocs, sx}) => {
 
   const _handleChangeSelectRowsPerPage = (e: any) => {
     onRowsPerPageChange(e.target.value)
@@ -27,12 +28,12 @@ const BoardPagination: FC<BoardPaginationProps> = ({rowsPerPageOptions, rowsPerP
   }
 
   return (
-    <Box display='flex' alignItems='center' justifyContent='space-between' width='100%'>
+    <Box display='flex' alignItems='center' justifyContent='space-between' width='100%' sx={sx}>
       <Box display='flex' alignItems='center'>
         <Typography variant="caption">
           Filas por pagina: 
         </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <FormControl sx={{ ml: 1, minWidth: 120 }} size="small">
           {/* <InputLabel id="select-rows-per-pagesmall">Age</InputLabel> */}
           <Select
             sx={{
@@ -55,10 +56,10 @@ const BoardPagination: FC<BoardPaginationProps> = ({rowsPerPageOptions, rowsPerP
         </FormControl>
       </Box>
       <Box display='flex' alignItems='center'>
-        <IconButton onClick={_handleChangePage(-1)} disabled={page <= 1}>
+        <IconButton onClick={_handleChangePage(-1)} disabled={page <= 1} size="small">
           <ChevronLeftIcon/>
         </IconButton>
-        <IconButton onClick={_handleChangePage(1)} disabled={(page + 1) >=  Math.ceil(totalDocs / rowsPerPage)}>
+        <IconButton onClick={_handleChangePage(1)} disabled={(page + 1) >=  Math.ceil(totalDocs / rowsPerPage)} size="small">
           <ChevronRightIcon/>
         </IconButton>
       </Box>
