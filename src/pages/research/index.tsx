@@ -27,7 +27,7 @@ const HomePage: FC = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Los Fiscales
+            LOS FISCALES
           </Typography>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
