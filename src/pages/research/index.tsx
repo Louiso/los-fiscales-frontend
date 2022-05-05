@@ -11,6 +11,8 @@ import { Menu as MenuIcon } from "@mui/icons-material";
 import { Outlet } from "react-router-dom";
 
 import AsideMetrics from "./AsideMetrics";
+import AsideMetrics2 from "./AsideMetrics2";
+import Form from "./Formulario";
 
 const HomePage: FC = () => {
   return (
@@ -27,18 +29,33 @@ const HomePage: FC = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            LOS FISCALES
+            Los Fiscales
           </Typography>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
       <Container>
         <Grid container spacing={1}>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <Outlet />
           </Grid>
-          <Grid item xs={4}>
+          {/* <Grid item xs={4}>
+            <AsideMetrics/>
+          </Grid> */}
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
             <AsideMetrics />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <AsideMetrics2 />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Form />
           </Grid>
         </Grid>
       </Container>
