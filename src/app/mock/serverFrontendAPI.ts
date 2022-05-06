@@ -23,7 +23,7 @@ const serverFrontendAPI: Record<
 > = {
   getMembers: async () => {
     return _instance.get("/api/members");
-  }
+  },
 };
 
 export default serverFrontendAPI;
