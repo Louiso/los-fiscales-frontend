@@ -262,7 +262,7 @@ const Form: FC = () => {
         <FormControlLabel
           control={<Checkbox />}
           label={
-            <a href="https://www.newadss.com/fotter?fbclid=IwAR26bjCE5aoKej38C2McwLfZtPnq7ZEZX_kyXnH9YaLrzRrJOHnXyhPpvGE" target="_blank" rel="noopener noreferrer">
+            <a href="https://drive.google.com/file/d/1tWlS2KRcK7wkAN4CFZD9jHuJq-rY47L6/view?fbclid=IwAR3YR1oVZItTPsmqnSBLAP0BlCCV1aAZIWxqf7SZNsOJYwRL-s2Yo6gZnlw" target="_blank" rel="noopener noreferrer">
             {"Acepta los Términos y Condiciones"}
           </a>}
           // "Acepta los Términos y Condiciones"

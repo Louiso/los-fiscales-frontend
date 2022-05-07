@@ -182,25 +182,25 @@ const AsideMetrics: FC = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} lg={6}>
           <Paper variant="outlined" sx={{ p: 1.5 }}>
-            <Typography variant="body2">
+            <Typography variant="h6">
               Entidades con mayor cantidad de funcionarios con presunta
               responsabilidad
-              <Bar width={'300'} options={optionsEntidad} data={dataEntidad} />
-              <a href={"https://www.google.com/"}>
-                En este enlace se puede encontrar la data completa
-              </a>
+            </Typography>
+            <Bar width={'300'} options={optionsEntidad} data={dataEntidad} />
+            <Typography sx={{mt: 2, display: 'block'}} variant="h6" component = "a" href={"https://drive.google.com/drive/folders/1g_BExbBvt2tYWkQVP2PrN7iIepdzxKzD?fbclid=IwAR1vSV-jaHzgXPSkwTEdbgJycYC8K1E-htoW6Px7wbSQX1E7UNj9GlGyMec"} target="_blank" rel="noreferrer">
+              En este enlace se puede encontrar la data completa
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} lg={6}>
           <Paper variant="outlined" sx={{ p: 1.5 }}>
-            <Typography variant="body2">
+            <Typography variant="h6">
               Regiones con mayor cantidad de funcionarios con presunta
               responsabilidad
-              <Bar width={'300'} options={optionsRegion} data={dataRegion} />
-              <a href={"https://www.google.com/"}>
-                En este enlace se puede encontrar la data completa
-              </a>
+            </Typography>
+            <Bar width={'300'} options={optionsRegion} data={dataRegion} />
+            <Typography sx={{mt: 2, display: 'block'}} variant="h6" component = "a" href={"https://drive.google.com/drive/folders/1KZDMCAiXgrRv3YGmDD6j3DKv9Ils4A-V?fbclid=IwAR2zDDTTTrJ6Ieik8NqM3JZnqDXMFo30Wk-RBxPl__xx1Uc9Wqzi2gTFCEA"} target="_blank" rel="noreferrer">
+              En este enlace se puede encontrar la data completa
             </Typography>
           </Paper>
         </Grid>

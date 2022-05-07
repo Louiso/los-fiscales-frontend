@@ -7,8 +7,8 @@ import {
   Toolbar,
   Typography
 } from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
-import { Outlet } from "react-router-dom";
+// import { Menu as MenuIcon } from "@mui/icons-material";
+import { Link, Outlet } from "react-router-dom";
 
 import AsideMetrics from "./AsideMetrics";
 import AsideMetrics2 from "./AsideMetrics2";
@@ -19,8 +19,12 @@ const HomePage: FC = () => {
   return (
     <div>
       <AppBar position="static" sx={{ backgroundColor: "primary" }}>
-        <Toolbar>
-          <IconButton
+        <Toolbar sx={{
+          '& > a': {
+            textDecoration: 'none',
+          }
+        }}>
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -28,10 +32,12 @@ const HomePage: FC = () => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Los Fiscales
-          </Typography>
+          </IconButton> */}
+          <Link to="/">
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white' }}>
+              Anacoes Peru
+            </Typography>
+          </Link>
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>

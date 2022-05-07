@@ -286,10 +286,9 @@ const AsideMetrics2: FC = () => {
                 </TableFooter>
               </Table>
             </TableContainer>
-            <a href={"https://www.google.com/"}>
+            <Typography sx={{mt: 2, display: 'block'}} variant="h6" component = "a" href={"https://docs.google.com/spreadsheets/d/1DBMsYqudcCYSI60t2kKEf9zx0RYUEwTh/edit?rtpof=true&sd=true&fbclid=IwAR0a0KToOEST0Z75dog6E6-4-tXG_aNn4Qd1bmH-gQ5sYT-F0Mv5afZc4-s"} target="_blank" rel="noreferrer">
               En este enlace se puede encontrar la data completa
-            </a>
-            
+            </Typography>
           </Paper>
         </Grid>
         <Grid  item xs={6}>
@@ -297,10 +296,10 @@ const AsideMetrics2: FC = () => {
             <Typography  variant="h6">
               Porcentaje promedio de miembros con presunta responsabilidad por
               convocatoria
-              <Bar width={150} options={optionsHist} data={dataHist} />
-              <a href={"https://www.google.com/"}>
-                En este enlace se puede encontrar la data completa
-              </a>
+            </Typography>
+            <Bar width={150} options={optionsHist} data={dataHist} />
+            <Typography sx={{mt: 2, display: 'block'}} variant="h6" component = "a" href={"https://docs.google.com/spreadsheets/d/1xNhOpEwyD7b3I_Dva1YE9M-rgUkO8Lkg/edit?fbclid=IwAR0BA3ooyD49Ea6jOlEt5myhm58c_yHsMnDNQCorSrLz4Bu640ryRZAyHPg#gid=516076021"} target="_blank" rel="noreferrer">
+              En este enlace se puede encontrar la data completa
             </Typography>
           </Paper>
         </Grid>
