@@ -86,6 +86,18 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
             ))}
           </AccordionPartialList>
         )}
+
+        {/* {Boolean(miembro.convocatorias && miembro.convocatorias.length) && (
+          <AccordionPartialList
+            disabledVisibilityIdent
+            display="flex"
+            getLabel={(expanded, restTotalChildren) => expanded ? 'Ver menos' : `Ver ${restTotalChildren} experiencia${restTotalChildren === 1 ? '' : 's'} más`}
+            title={`${miembro.convocatorias.length >= 12 ? 12: miembro.convocatorias.length} Ultimas convocatorias:`}>
+            {miembro.convocatorias!.map((convocatoria) => (
+              <ConvocatoriaCard key={convocatoria.codigo_convocatoria} convocatoria={convocatoria} sx={{height: '100%'}} />
+            ))}
+          </AccordionPartialList>
+        )} */}
         {/* <Box
           sx={{
             display: "grid",
