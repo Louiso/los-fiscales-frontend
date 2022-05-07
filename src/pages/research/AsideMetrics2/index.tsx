@@ -218,7 +218,7 @@ const AsideMetrics2: FC = () => {
                   
                 /> */}
               </TableContainer>
-              <a href={"https://www.google.com/"}>
+              <a href={"https://www.google.com/"} target="_blank" rel="noreferrer">
                 En este enlace se puede encontrar la data completa
               </a>
             </Typography>
@@ -230,7 +230,7 @@ const AsideMetrics2: FC = () => {
               Porcentaje promedio de miembros con presunta responsabilidad por
               convocatoria
               <Bar width={150} options={optionsHist} data={dataHist} />
-              <a href={"https://www.google.com/"}>
+              <a href={"https://www.google.com/"} target="_blank" rel="noreferrer">
                 En este enlace se puede encontrar la data completa
               </a>
             </Typography>

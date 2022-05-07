@@ -187,7 +187,7 @@ const AsideMetrics: FC = () => {
               Entidades con mayor cantidad de funcionarios con presunta
               responsabilidad
               <Bar width={'300'} options={optionsEntidad} data={dataEntidad} />
-              <a href={"https://www.google.com/"}>
+              <a href={"https://www.google.com/"} target="_blank" rel="noreferrer">
                 En este enlace se puede encontrar la data completa
               </a>
             </Typography>
@@ -199,7 +199,7 @@ const AsideMetrics: FC = () => {
               Regiones con mayor cantidad de funcionarios con presunta
               responsabilidad
               <Bar width={'300'} options={optionsRegion} data={dataRegion} />
-              <a href={"https://www.google.com/"}>
+              <a href={"https://www.google.com/"} target="_blank" rel="noreferrer">
                 En este enlace se puede encontrar la data completa
               </a>
             </Typography>
