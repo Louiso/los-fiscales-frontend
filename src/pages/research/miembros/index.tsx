@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -43,7 +44,7 @@ const Miembros: FC = () => {
 
     return {
       search: params.q || '',
-      sortBy: params.sortBy || SortByMemberOptionKey.PreRespPenal,
+      sortBy: params.sortBy || SortByMemberOptionKey.Penal,
       page: params.page && !isNaN(Number(params.page)) ? Math.max(1, Number(params.page)) : 1,
       limit: Number(params.limit || 15),
     }
@@ -53,7 +54,7 @@ const Miembros: FC = () => {
 
   const getMiembrosQuery = useGetMiembros({
     variables: {
-      page: 0,
+      page: queryParams.page ?? 1,
       search: searchTextDebounce,
       sortBy: queryParams?.sortBy
     }
@@ -150,18 +151,24 @@ const Miembros: FC = () => {
         onPageChange={_handleChangePage}
         onRowsPerPageChange={_handleChangeRowsPerPage}
         />
-      <Box
-        sx={{
-          pt: 1.5,
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gridGap: "12px"
-        }}
-      >
-        {(miembros ?? []).map((miembro) => (
-          <MiembroConvocatoriaCard key={miembro._id} miembro={miembro} />
-        ))}
-      </Box>
+        {getMiembrosQuery.data ? (
+          <Box
+            sx={{
+              pt: 1.5,
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gridGap: "12px"
+            }}
+          >
+            {(miembros).map((miembro) => (
+              <MiembroConvocatoriaCard key={miembro.dni} miembro={miembro} />
+            ))}
+          </Box>
+        ): (
+          <Box display='flex' alignItems='center' justifyContent='center' minHeight='50vh'>
+            <CircularProgress/>
+          </Box>
+        )}
       <BoardPagination
         sx={{
           mt: 1

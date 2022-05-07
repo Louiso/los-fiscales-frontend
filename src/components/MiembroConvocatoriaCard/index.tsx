@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Tooltip, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { MiembroConvocatoria, IrregularKey } from 'types';
 import { capitalizeSentence } from "utils";
@@ -38,26 +38,27 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
         action={
           <Box display="flex" alignItems='center'>
             {Object.keys(miembro.irregulars).map((key) => (
-              <Box
-                key={key}
-                display="flex"
-                alignItems="center"
-                sx={{ mr: 1 }}
-              >
-                <img
-                  style={{
-                    width: 24,
-                    height: 24
-                  }}
-                  src={
-                    ResponsabilidadSrcIconParser[
-                      key as ResponsabilidadSrcIconParserKey
-                    ]
-                  }
-                />
-                &nbsp;&nbsp;
-                <Typography variant="caption">{miembro.irregulars[key as IrregularKey]}</Typography>
-              </Box>
+              <Tooltip title={key} key={key}>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  sx={{ mr: 1 }}
+                >
+                  <img
+                    style={{
+                      width: 24,
+                      height: 24
+                    }}
+                    src={
+                      ResponsabilidadSrcIconParser[
+                        key as ResponsabilidadSrcIconParserKey
+                      ]
+                    }
+                  />
+                  &nbsp;&nbsp;
+                  <Typography variant="caption">{miembro.irregulars[key as IrregularKey]}</Typography>
+                </Box>
+              </Tooltip>
             ))}
           </Box>
         }
@@ -72,12 +73,12 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
         </Typography>
         {Boolean(miembro.convocatorias && miembro.convocatorias.length) && (
           <>
-            <Typography variant="body2" component="div" sx={{ mt: 1 }}>Ultimas convocatorias:</Typography>
+            <Typography variant="h6" component="div" sx={{ mt: 1 }}>Ultimas convocatorias:</Typography>
             <Box
               sx={{
                 display: "grid",
                 mt: 1.5,
-                gridTemplateColumns: "1fr",
+                gridTemplateColumns: "1fr 1fr 1fr",
                 gridGap: "8px"
               }}
             >

@@ -1,6 +1,7 @@
 import axios from "axios";
 // import axiosMock from "./utils/axios";
 // import serverBackendAPI from "./serverBackendAPI";
+import qs from 'query-string'
 
 const getInstance = () => {
   // if (import.meta.env.MODE === "development")
@@ -23,8 +24,8 @@ const serverFrontendAPI: Record<
   string,
   (args?: MethodOptions) => Promise<any>
 > = {
-  getMembers: async () => {
-    const { data: { data } } = await _instance.get("/api/miembros");
+  getMembers: async (args) => {
+    const { data: { data } } = await _instance.get(`/api/miembros?${qs.stringify(args?.variables)}`);
     
     return data
   },
