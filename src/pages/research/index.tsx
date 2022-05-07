@@ -34,8 +34,8 @@ const HomePage: FC = () => {
             <MenuIcon />
           </IconButton> */}
           <Link to="/">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white', fontSize: 20 }}>
-              Anacoes Peru | <span style={{ fontWeight: 300, fontSize: 10 }}> Análisis de contrataciones del estado peruano</span>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white', fontSize: 24 }}>
+              Anacoes Peru | <span style={{ fontWeight: 300, fontSize: 12 }}> Análisis de contrataciones del estado peruano</span>
             </Typography>
           </Link>
           {/* <Button color="inherit">Login</Button> */}
