@@ -90,7 +90,7 @@ const optionsHist = {
   }
 };
 
-const labels = ['0-10', '10-20','20-30','30-40','40-50','50-60','60-70','70-80','80-90','90-100'];
+const labels = ['0-10','10-20','20-30','30-40','40-50','50-60','60-70','70-80','80-90','90-100'];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -116,7 +116,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const AsideMetrics2: FC = () => {
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [anio, setAnio] = useState('');
 
@@ -194,6 +194,7 @@ const AsideMetrics2: FC = () => {
   const handleChange = (event: any) => {
     setAnio(event.target.value); 
     setFlag(false);
+    setPage(0);
   };
 
   useEffect( () => (
@@ -243,7 +244,7 @@ const AsideMetrics2: FC = () => {
                   {rows
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
-                    <StyledTableRow key={row.name}>
+                    <StyledTableRow key={row.name + row.year}>
                       <StyledTableCell component="th" scope="row">
                         {row.name}
                       </StyledTableCell>
@@ -262,16 +263,14 @@ const AsideMetrics2: FC = () => {
                 <TableFooter>
                   <TableRow>
                     <TablePagination
-                      rowsPerPageOptions={[5, 10, 25]}
+                      rowsPerPageOptions={[5, 10, 15]}
                       count = {rows.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
                       SelectProps={{
-                        inputProps: {
-                          'aria-label': 'rows per page',
-                        },
                         native: true,
                       }}
+                      labelRowsPerPage = {'Registros por página:'}
                       onPageChange={handleChangePage}
                       onRowsPerPageChange={handleChangeRowsPerPage}
                     />
