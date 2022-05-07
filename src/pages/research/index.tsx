@@ -34,8 +34,8 @@ const HomePage: FC = () => {
             <MenuIcon />
           </IconButton> */}
           <Link to="/">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white', fontSize: 20 }}>
-              Anacoes Peru
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white', fontSize: 24 }}>
+              Anacoes Peru · <span style={{ fontWeight: 300, fontSize: 12 }}> Análisis de contrataciones del Estado Peruano</span>
             </Typography>
           </Link>
           {/* <Button color="inherit">Login</Button> */}
