@@ -40,7 +40,7 @@ const InformeControlCard: FC<PresuntoCardProps> = ({ presunto, sx }) => {
         <Typography variant="caption" sx={{mt: .5}} component='div'><strong>Departamento:</strong> {presunto.departamento}</Typography>
         <Typography variant="caption" sx={{mt: .5}} component='div'><strong>Provincia:</strong> {presunto.provincia}</Typography>
         <Typography variant="caption" sx={{mt: .5}} component='div'><strong>Distrito:</strong> {presunto.distrito}</Typography>
-        {presunto.civil?<Typography variant="caption" sx={{mt: .5}} component='div'><strong>Resposnabilidad Civil:</strong> {presunto.civil?'Sí.':'No'}</Typography>:<div></div>}
+        {presunto.civil?<Typography variant="caption" sx={{mt: .5}} component='div'><strong>Resposnabilidad Civil:</strong> {presunto.civil?'Sí':'No'}</Typography>:<div></div>}
         {presunto.penal? <Typography variant="caption" sx={{mt: .5}} component='div'><strong>Resposnabilidad Penal:</strong> {presunto.penal?'Sí':'No'}</Typography> :<div></div> }
         {presunto.adm_ent? <Typography variant="caption" sx={{mt: .5}} component='div'><strong>Resposnabilidad Adm. ENT:</strong> {presunto.adm_ent?'Sí':'No'}</Typography> :<div></div> }
         {presunto.adm_pas?<Typography variant="caption" sx={{mt: .5}} component='div'><strong>Resposnabilidad Adm. PAS:</strong> {presunto.adm_pas?'Sí':'No'}</Typography>: <div></div>} 
