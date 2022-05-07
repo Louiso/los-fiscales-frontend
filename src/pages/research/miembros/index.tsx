@@ -47,7 +47,7 @@ const Miembros: FC = () => {
       search: params.q || '',
       sortBy: params.sortBy || SortByMemberOptionKey.Penal,
       page: params.page && !isNaN(Number(params.page)) ? Math.max(1, Number(params.page)) : 1,
-      limit: Number(params.limit || 15),
+      limit: Number(params.limit || 5),
     }
   }, [location.search])
 
@@ -55,6 +55,7 @@ const Miembros: FC = () => {
 
   const getMiembrosQuery = useGetMiembros({
     variables: {
+      limit: queryParams.limit,
       page: queryParams.page ?? 1,
       search: searchTextDebounce,
       sortBy: queryParams?.sortBy
@@ -141,13 +142,13 @@ const Miembros: FC = () => {
         </FormControl>
       </Box>
       <BoardPagination
-        rowsPerPageOptions={[15, 30, 50]}
+        rowsPerPageOptions={[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
         count={miembros.length}
         sx={{
           mt: 1
         }}
         totalDocs={info?.totalDocs ?? 0}
-        rowsPerPage={queryParams.limit}
+        rowsPerPage={queryParams.limit ?? 5}
         page={queryParams.page}
         onPageChange={_handleChangePage}
         onRowsPerPageChange={_handleChangeRowsPerPage}
@@ -179,10 +180,10 @@ const Miembros: FC = () => {
         sx={{
           mt: 1
         }}
-        rowsPerPageOptions={[15, 30, 50]}
+        rowsPerPageOptions={[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
         count={miembros.length}
         totalDocs={info?.totalDocs ?? 0}
-        rowsPerPage={queryParams.limit}
+        rowsPerPage={queryParams.limit ?? 5}
         page={queryParams.page}
         onPageChange={_handleChangePage}
         onRowsPerPageChange={_handleChangeRowsPerPage}
