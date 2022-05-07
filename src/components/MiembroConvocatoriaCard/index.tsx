@@ -64,9 +64,11 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
                 </Box>
               </Tooltip>
             ))}
-            <a href={`${import.meta.env.VITE_SERVER_URL}/api/miembros/${miembro.dni}`} target="_blank" rel="noreferrer">
-              <LaunchIcon />
-            </a>
+            <Tooltip title="Data Completa">
+              <a href={`${import.meta.env.VITE_SERVER_URL}/api/miembros/${miembro.dni}`} target="_blank" rel="noreferrer">
+                <LaunchIcon />
+              </a>
+            </Tooltip>
           </Box>
         }
       />
