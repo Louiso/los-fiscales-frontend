@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { MiembroConvocatoria } from "types";
+import { MiembroConvocatoria } from 'types';
 
 interface UseGetMiembrosArgs {
   variables: {

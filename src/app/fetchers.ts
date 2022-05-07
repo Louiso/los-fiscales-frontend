@@ -1,4 +1,4 @@
-import serverFrontendAPI from "./mock/serverFrontendAPI";
+import serverFrontendAPI from "./serverFrontendAPI";
 import state from "./state";
 
 interface FetcherArgs {

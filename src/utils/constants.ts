@@ -1,25 +1,28 @@
 export enum SortByMemberOptionKey {
-  PreRespPenal = "pre-resp-penal",
-  PreRespAdmin = "pre-resp-administrativa",
-  PreRespTotal = "pre-resp-total",
+  Penal = "penal",
+  Admin = "adm",
+  // PreRespTotal = "pre-resp-total",
+  AdmEnt = 'adm_ent',
+  Civil = 'civil',
+  AdmPas = 'adm_pas',
   FrePartConv = "fre-part-conv"
 }
 
 export const SortByMemberOptions = [
   {
-    value: SortByMemberOptionKey.PreRespPenal,
+    value: SortByMemberOptionKey.Penal,
     label: "Presunta Resp. Penal"
   },
   {
-    value: SortByMemberOptionKey.PreRespAdmin,
+    value: SortByMemberOptionKey.Admin,
     label: "Presunta Resp. Administrativa"
   },
-  {
-    value: SortByMemberOptionKey.PreRespTotal,
-    label: "Presunta Resp. Total"
-  },
-  {
-    value: SortByMemberOptionKey.FrePartConv,
-    label: "Frecuente Partición en Convocatorias"
-  }
+  // {
+  //   value: SortByMemberOptionKey.PreRespTotal,
+  //   label: "Presunta Resp. Total"
+  // },
+  // {
+  //   value: SortByMemberOptionKey.FrePartConv,
+  //   label: "Frecuente Partición en Convocatorias"
+  // }
 ];
