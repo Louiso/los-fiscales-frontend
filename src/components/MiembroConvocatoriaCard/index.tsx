@@ -35,6 +35,9 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
             </Typography>
           </MaybeTooltip>
         }
+        sx={{
+          pb: 0
+        }}
         action={
           <Box display="flex" alignItems='center'>
             {Object.keys(miembro.irregulars).map((key) => (
@@ -63,7 +66,7 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
           </Box>
         }
       />
-      <CardContent>
+      <CardContent sx={{pt: 1}}>
         <Typography variant="body2" component="div" sx={{ mt: 1 }}>
           N° convocatorias:&nbsp;{miembro.totalConvocatorias}
         </Typography>
@@ -73,7 +76,7 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
         </Typography>
         {Boolean(miembro.convocatorias && miembro.convocatorias.length) && (
           <>
-            <Typography variant="h6" component="div" sx={{ mt: 1 }}>Ultimas convocatorias:</Typography>
+            <Typography variant="h6" component="div" sx={{ mt: 1.5 }}>Ultimas convocatorias:</Typography>
             <Box
               sx={{
                 display: "grid",

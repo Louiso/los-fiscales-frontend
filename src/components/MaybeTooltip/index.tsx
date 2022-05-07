@@ -16,13 +16,17 @@ const MaybeTooltip: FC<MaybeTooltipProps> = ({
   const titleRef = useRef<{
     offsetWidth: number;
     scrollWidth: number;
+    scrollHeight: number;
+    clientHeight: number;
   }>();
 
   useEffect(() => {
-    if (titleRef.current)
+    if (titleRef.current) {
       setNeedTooltip(
-        titleRef.current.offsetWidth < titleRef.current.scrollWidth
+        titleRef.current.offsetWidth < titleRef.current.scrollWidth || 
+        titleRef.current.scrollHeight > titleRef.current.clientHeight
       );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
