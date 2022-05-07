@@ -17,7 +17,8 @@ import {
   Checkbox,
   Button,
   Grid,
-  Alert
+  Alert,
+  Paper
 } from "@mui/material";
 import { useState } from "react";
 
@@ -130,20 +131,20 @@ const Form: FC = () => {
   }
 
   return (
-    <Box
+    <Paper
       sx={{
-        backgroundColor: "white",
-        p: 2.5,
+        bgColor: "white",
+        py: 8,
+        px: 8,
         mt: 5,
         mb: 2
       }}
-      maxWidth="xs"
     >
       <Typography className={heading} variant="h4">
         Formulario de Registro de Presunto Implicado
       </Typography>
       <form onSubmit={handleSubmit} >
-        <Box display="flex" alignItems='center' sx={{mt: 1.5}}>
+        <Box display="flex" alignItems='center' sx={{mt: 2.5}}>
           <TextField
             variant="outlined"
             label="Nombre del Personaje Implicado"
@@ -154,7 +155,7 @@ const Form: FC = () => {
             required
           />
           
-          <FormControl sx={{ width: 200, ml: 1.5 }} >
+          <FormControl sx={{ width: 200, ml: 2.5 }} >
             <InputLabel id="demo-simple-select-label">Región</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -179,7 +180,7 @@ const Form: FC = () => {
           </FormControl>
         </Box>
         
-        <Box display="flex" alignItems='center' sx={{mt: 1.5}}>
+        <Box display="flex" alignItems='center' sx={{mt: 2.5}}>
           <FormControlLabel
             control={(
               <Checkbox 
@@ -225,8 +226,7 @@ const Form: FC = () => {
         <Typography sx={{
           fontSize: '20px',
           fontWeight: 'normal',
-          marginLeft: 1,
-          marginTop: 1
+          mt: 2.5
         }}>
           INFORMACIÓN DEL DENUNCIANTE
         </Typography>
@@ -266,7 +266,7 @@ const Form: FC = () => {
           
         </Grid>
       </form>
-    </Box>
+    </Paper>
   );
 };
 
