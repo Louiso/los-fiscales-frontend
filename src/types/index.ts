@@ -1,71 +1,71 @@
-export type PresuntaIrregularidad = {
-  etiqueta: string;
-  valor: string;
-  total: number;
-};
+export interface Convocatoria {
+  codigo_convocatoria: number;
+  miembro_comite: string;
+  year_convocatoria: number;
+  codigo_entidad_convocante: string;
+  entidad_ruc_convocante: string;
+  nombre_entidad: string;
+  tipo_entidad: string;
+  descripcion_proceso: string;
+  codigo_proceso: string;
+  tipo_compra: string;
+  objeto_contractual: string;
+  sector_entidad_convocante: string;
+  sistema_contratacion_proceso: string;
+  tipo_proceso_seleccion: string;
+  monto_referencial: string;
+  cantidad_items?: any;
+  n_item: string;
+  unidad_medida_item: string;
+  estado_item: string;
+  flag_paquete: string;
+  codigo_item: string;
+  item_cubso: string;
+  distrito_item: string;
+  provincia_item: string;
+  departamento_item: string;
+  monto_referencial_item: string;
+  moneda: string;
+  fecha_convocatoria: string;
+  fecha_integracion_bases: string;
+  fecha_presentacion_propuesta: string;
+  year_convocatoria_osce: number;
+  descripcion_item: string;
+}
 
-export type Irregular = {
-  _id: string;
-  nombres: string;
+export interface Presunto {
+  id: number;
+  num_inform: string;
   dni: string;
-  proyectosTotal: number;
-  presuntasIrregularidades: PresuntaIrregularidad[];
-  grado: number;
-  // links donde es tiene presuntas irregularidades
-};
-
-export type MiembroConvocatoria = {
-  _id: string;
-  nombres: string;
-  convocatoriaTotal: number;
-  proyectoIrregularTotal: number;
-  presuntasIrregularidades: PresuntaIrregularidad[];
-  relacionesIrregulares: Irregular[];
-  ultimasConvocatorias?: Convocatoria[];
-};
-
-export type UnitMeasure = "UNIDAD" | "SERVICIO";
-export type ItemStatus = "CONSENTIDO" | "ADJUDICADO";
-export type Currency = "USD" | "PEN";
-
-export type Item = {
-  _id: string;
-  total: number;
-  descripcion: string;
-  medidaUnidad: UnitMeasure;
-  estado: ItemStatus;
-  esPaquete: boolean;
-  codigo: string;
-  cubso: string;
-  distrito: string;
+  fullname: string;
+  civil: boolean;
+  penal: boolean;
+  adm_ent: boolean;
+  adm_pas: boolean;
+  adm: boolean;
+  departamento: string;
   provincia: string;
-  referencialMonto: number;
-  moneda: Currency;
-};
+  distrito: string;
+  fecha_emision: string;
+}
 
-export type Entidad = {
-  _id: string;
-  codigo: string;
-  nombre: string;
-  ruc: string;
-  tipo: string;
-};
+export interface Irregulars {
+  civil: number;
+  penal: number;
+  adm_ent: number;
+  adm_pas: number;
+  adm: number;
+}
 
-export type Convocatoria = {
-  _id: string;
-  miembros: MiembroConvocatoria[];
-  entidad: Entidad;
-  codigo: string;
-  descripcionProceso: string;
-  codigoProceso: string;
-  procesoSeleccionTipo: string;
-  compraTipo: string;
-  objectoContractual: string;
-  sector: string;
-  sistemaContratacion: string;
-  referencialMonto: number;
-  item: Item;
-  convocatoriaFecha: Date;
-  baseIntegracionFecha: Date;
-  propuestaPresentacionFecha: Date;
-};
+export type IrregularKey = keyof Irregulars;
+
+export interface MiembroConvocatoria {
+  dni: string;
+  penal: boolean;
+  fullname: string;
+  total_penal: number;
+  convocatorias: Convocatoria[];
+  totalConvocatorias: number;
+  presuntos: Presunto[];
+  irregulars: Irregulars;
+}

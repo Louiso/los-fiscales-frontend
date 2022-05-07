@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { Irregular } from "types";
+import { Irregular } from "types/trash";
 import { capitalizeSentence } from "utils";
 import qs from "query-string";
 import { Launch as LaunchIcon } from "@mui/icons-material";

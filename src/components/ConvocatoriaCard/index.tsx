@@ -14,7 +14,7 @@ const ConvocatoriaCard: FC<ConvocatoriaCardProps> = ({ convocatoria }) => {
     <Card variant='outlined'>
       <CardHeader
         sx={{p: 1.5}}
-        title={`${convocatoria.entidad.nombre} - ${convocatoria.codigo}`}
+        title={`${convocatoria.nombre_entidad} - ${convocatoria.codigo_convocatoria}`}
         titleTypographyProps={{
           variant: 'h6',
         }}
@@ -22,12 +22,12 @@ const ConvocatoriaCard: FC<ConvocatoriaCardProps> = ({ convocatoria }) => {
           action: classes.action,
         }}
         action={
-          <Typography variant="caption">{dayjs(convocatoria.convocatoriaFecha).format('MM/DD/YYYY')}</Typography>
+          <Typography variant="caption">{dayjs(convocatoria.fecha_convocatoria).format('MM/DD/YYYY')}</Typography>
         }
       />
       <CardContent sx={{p: 1.5}}>
-        <Typography variant="caption" component='div'><strong>Descripción:</strong> {convocatoria.descripcionProceso}</Typography>
-        <Typography variant="caption" component='div'><strong>Tipo de Entidad:</strong> {convocatoria.entidad.tipo}</Typography>
+        <Typography variant="caption" component='div'><strong>Descripción:</strong> {convocatoria.descripcion_proceso}</Typography>
+        <Typography variant="caption" component='div'><strong>Tipo de Entidad:</strong> {convocatoria.tipo_entidad}</Typography>
       </CardContent>
     </Card>
   )

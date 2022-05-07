@@ -8,7 +8,6 @@ import { ThemeProvider } from "@mui/material";
 import theme from "config/theme";
 import { SWRConfig } from "swr";
 
-import "app/mock/serverFrontendAPI";
 import { fetcher, serialize } from "app/fetchers";
 
 ReactDOM.render(
