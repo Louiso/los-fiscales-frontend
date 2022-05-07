@@ -33,7 +33,7 @@ Some helpful scripts:
 // de los packages
 "commitizen": "^4.2.4",
 
-// se saco del package.json
+// Se saco del package.json
 "config": {
 "commitizen": {
 "path": "./node_modules/cz-conventional-changelog"
