@@ -18,6 +18,7 @@ import qs from 'query-string'
 import { useDebounce } from 'use-debounce'
 import { useLocation, useNavigate } from "react-router-dom";
 import BoardPagination from "components/BoardPagination";
+import Images from "assets/images";
 
 interface QueryParams {
   q: string; // search query
@@ -151,7 +152,8 @@ const Miembros: FC = () => {
         onPageChange={_handleChangePage}
         onRowsPerPageChange={_handleChangeRowsPerPage}
         />
-        {getMiembrosQuery.data ? (
+        {getMiembrosQuery.data ? 
+          miembros.length > 0 ? (
           <Box
             sx={{
               pt: 1.5,
@@ -160,9 +162,13 @@ const Miembros: FC = () => {
               gridGap: "12px"
             }}
           >
-            {(miembros).map((miembro) => (
+            {miembros.map((miembro) => (
               <MiembroConvocatoriaCard key={miembro.dni} miembro={miembro} />
             ))}
+          </Box>
+        ) : (
+          <Box display='flex' alignItems='center' justifyContent='center' minHeight='50vh'>
+            <img src={Images.EmptySvg} alt="empty"/>
           </Box>
         ): (
           <Box display='flex' alignItems='center' justifyContent='center' minHeight='50vh'>

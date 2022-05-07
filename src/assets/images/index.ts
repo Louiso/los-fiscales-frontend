@@ -4,6 +4,7 @@ import AdminPas from "./admin_pas.png";
 import Penal from "./penal.png";
 import Civil from "./civil.png";
 import Logo from "./logo.png";
+import EmptySvg from "./empty_item.svg";
 
 const Images = {
   Admin,
@@ -11,7 +12,8 @@ const Images = {
   AdminPas,
   Penal,
   Civil,
-  Logo
+  Logo,
+  EmptySvg
 };
 
 export default Images;
