@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Tooltip, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, IconButton, Tooltip, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { MiembroConvocatoria, IrregularKey } from 'types';
 import { capitalizeSentence } from "utils";
@@ -10,7 +10,7 @@ import MaybeTooltip from "components/MaybeTooltip";
 // import IrregularCard from "components/IrregularCard";
 import ConvocatoriaCard from "components/ConvocatoriaCard";
 import AccordionPartialList from "components/AccordionPartialList";
-
+import { Launch as LaunchIcon } from "@mui/icons-material";
 interface MiembroConvocatoriaCardProps {
   miembro: MiembroConvocatoria;
 }
@@ -64,6 +64,9 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
                 </Box>
               </Tooltip>
             ))}
+            <a href={`${import.meta.env.VITE_SERVER_URL}/api/miembros/${miembro.dni}`} target="_blank" rel="noreferrer">
+              <LaunchIcon />
+            </a>
           </Box>
         }
       />
