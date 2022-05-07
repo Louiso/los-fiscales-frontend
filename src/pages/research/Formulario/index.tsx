@@ -1,8 +1,12 @@
 import React, { FC } from "react";
 import { makeStyles } from "@mui/styles";
+import { ubigeo } from 'peruuse';
+import axios from 'axios';
+
+// import Select from 'react-select';
+
 import {
   Box,
-  Container,
   Typography,
   TextField,
   FormControl,
@@ -11,10 +15,14 @@ import {
   MenuItem,
   Select,
   Checkbox,
-  Button
+  Button,
+  Grid,
+  rgbToHex,
+  Alert
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
+import { fontWeight, padding } from "@mui/system";
 
 interface IFormInput {
   email: string;
@@ -22,35 +30,114 @@ interface IFormInput {
   password: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   heading: {
     textAlign: "center"
   },
   submitButton: {
-    textAlign: "center"
+    textAlign: "center",
   }
 }));
 
-const Form: FC = () => {
-  const { heading, submitButton } = useStyles();
+ubigeo.getDepartments();
 
-  const [json, setJson] = useState<string>();
+const Form: FC = () => {
+  const { heading, submitButton} = useStyles();
+  
+  const [state, setState] = useState({
+    nombre_denunciado: '',
+    region: '',
+    flag_entidad: false,
+    entidad: '',
+    flag_miembro_comite: false,
+    url_denunciado: '',
+    email_denunciante: ''
+  });
+
+  const [emailField, setEmailField] = React.useState({
+    value: "",
+    hasError: false,
+  });
+  
+  const [alert, setAlert] = React.useState(false);
 
   const [checked, setChecked] = useState(false);
-
-  const onSubmit = (data: IFormInput) => {
-    setJson(JSON.stringify(data));
+  const [entidadShow, setEntidadShow] = useState('');
+  
+  const handleSubmit = async (event:any) => {
+    event.preventDefault();
+    console.log(state);
+    
+    const payload = { nombre_denunciado: state.nombre_denunciado,
+      email_denunciante:state.email_denunciante,
+      region:state.region,
+      flag_entidad: Number(state.flag_entidad),
+      nombre_entidad:state.entidad,
+      flag_miembro_comite: Number(state.flag_miembro_comite),
+      miembro_comite: '',
+      prueba_url: state.url_denunciado};
+    
+    try {
+      const rest = await axios.post('http://localhost:8000/api/denuncias/create', payload);   
+      console.log('succes: ',rest);
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000)
+      setState({
+        nombre_denunciado : '',
+        region : '',
+        flag_entidad : false,
+        entidad : '',
+        flag_miembro_comite : false,
+        url_denunciado : '',
+        email_denunciante : ''
+      });
+    }
+    catch (error){
+      setAlert(false);
+      console.log('error');
+    }
   };
 
-  const [age, setAge] = React.useState("");
+  const handleChange = (event: any) => {
+    setState((prev)=>({
+      ...prev,
+      [event.target.name]: event.target.value
+    })); 
+  };
+  console.log(state);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+  const handleChecked = (event: any) => {
+    if (event.target.checked && event.target.name == 'flag_entidad'){
+      setEntidadShow('');
+    }
+    else{
+      setEntidadShow('none');
+    }
+    setEntidadShow
+    setState((prev)=>({
+      ...prev,
+      [event.target.name]: event.target.checked
+    }));
   };
 
-  const showChange = () => {
-    setChecked(!checked);
-  };
+  const handleBlur = (event: any) => {
+    const emailRegexp = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
+    const hasError = !emailRegexp.test(event.target.value);
+    console.log('hasError: ', hasError);
+    setEmailField((prev) => ({ 
+      ...prev, 
+      hasError 
+    }));
+
+    if (!event.target.value){
+      setEmailField((prev) => ({ 
+        ...prev, 
+        hasError: false
+      }));
+    }
+  }
 
   return (
     <Box
@@ -65,89 +152,124 @@ const Form: FC = () => {
       <Typography className={heading} variant="h4">
         Formulario de Registro de Presunto Implicado
       </Typography>
-      <form>
-        <TextField
+      <form onSubmit={handleSubmit} >
+        <TextField sx={{ marginTop: 1,
+          marginBottom: 2}}
           variant="outlined"
-          margin="normal"
-          label="Pregunta sobre Corrupción"
-          fullWidth
-          required
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
           label="Nombre del Personaje Implicado"
+          value = {state.nombre_denunciado}
+          name = 'nombre_denunciado'
+          onChange={handleChange}
           fullWidth
           required
         />
-        <FormControl sx={{ width: 200 }}>
+        <FormControl sx={{ width: 200 }} >
           <InputLabel id="demo-simple-select-label">Región</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={age}
+            value = {state.region}
             label="Región"
-            onChange={handleChange}
+            name = 'region'
+            onChange={handleChange} 
+            MenuProps={{ 
+              PaperProps: {
+                sx: {
+                  height: 200,
+                },
+              },
+            }}
             required
           >
-            <MenuItem value={10}>Lima</MenuItem>
-            <MenuItem value={20}>Piura</MenuItem>
-            <MenuItem value={30}>Arequipa</MenuItem>
+            {ubigeo.getDepartments().map((department)=>(
+              <MenuItem value={department.name} key={department.name}>{department.name}</MenuItem>      
+            ))}
           </Select>
         </FormControl>
 
         <FormControlLabel
           sx={{ p: 1 }}
-          control={<Checkbox onChange={showChange} />}
+          control={<Checkbox 
+            onChange={handleChecked}
+            checked = {state.flag_entidad}
+            name = 'flag_entidad' />}
           label="Pertenece a una Entidad?"
         />
 
-        <FormControl sx={{ width: 400 }} className={"hidden"}>
-          <InputLabel id="demo-simple-select-label">Entidad</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Entidad"
-            onChange={handleChange}
-          >
-            <MenuItem value={10}>PNP</MenuItem>
-            <MenuItem value={20}>Ministerio Transporte</MenuItem>
-          </Select>
-        </FormControl>
+        <TextField
+          sx={{ width: 400, display: entidadShow }}
+          variant="outlined"
+          // margin="normal"
+          label="Entidad"
+          value = {state.entidad}
+          name = 'entidad'
+          onChange={handleChange}
+          fullWidth
+          required = {state.flag_entidad}
+        />
 
         <FormControlLabel
           sx={{ p: 1 }}
           control={<Checkbox />}
           label="Es Miembro de Comite?"
+          checked = {state.flag_miembro_comite}
+          name = 'flag_miembro_comite'
+          onChange={handleChecked}
         />
 
         <TextField
           variant="outlined"
           margin="normal"
-          label="Link de Perfil"
+          label="Link de Evidencia"
           type="text"
+          value = {state.url_denunciado}
+          name = 'url_denunciado'
+          onChange={handleChange}
           fullWidth
           required
         />
-        <Button
-          type="submit"
+        <Typography sx={{
+          fontSize: '20px',
+          fontWeight: 'normal',
+          marginLeft: 1,
+          marginTop: 1
+        }}>INFORMACIÓN DEL DENUNCIANTE</Typography>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          label="Email (Opcional)"
+          type="email"
+          value = {state.email_denunciante}
+          name = 'email_denunciante'
+          onChange={handleChange}
+          onBlur={handleBlur} 
           fullWidth
-          variant="contained"
-          color="primary"
-          className={submitButton}
-        >
-          ENVIAR
-        </Button>
-        {json && (
-          <>
-            <Typography variant="body1">
-              Below is the JSON that would normally get passed to the server
-              when a form gets submitted
-            </Typography>
-            <Typography variant="body2">{json}</Typography>
-          </>
+        />
+        <Typography sx={{
+          color: 'rgba(255, 0, 0)',
+          padding: 1
+        }}>
+          {emailField.hasError ? 'Ingrese un email válido' : ''}
+        </Typography>
+        {!alert ? (
+          ''
+        ) : (
+          <Alert severity="success">Registro Exitoso</Alert>
         )}
+        <Grid textAlign='center' marginTop={3}>
+          <Button
+            type="submit"
+            // fullWidth
+            variant="contained"
+            color="primary"
+            className={submitButton}
+            size='large'
+          >
+            ENVIAR
+          </Button>
+          
+          
+        </Grid>
       </form>
     </Box>
   );

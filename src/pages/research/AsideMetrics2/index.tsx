@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import axios from 'axios'
 import {
   Grid,
   Box,
@@ -9,7 +10,8 @@ import {
   TableContainer,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  TablePagination
 } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
@@ -52,7 +54,8 @@ const optionsHist = {
   responsive: true,
   plugins: {
     legend: {
-      position: "top" as const
+      position: "top" as const,
+      display: false
     },
     title: {
       display: true
@@ -61,35 +64,34 @@ const optionsHist = {
   pan: {
     enabled: true,
     mode: "xy"
+  },
+  zoom: {
+    enabled: true,
+    drag:true,
+    mode: 'xy',
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        display: false,
+        barPercentage: 1.3,
+        ticks: {
+            max: 3,
+        }
+      }, {
+        display: true,
+        ticks: {
+            autoSkip: false,
+            max: 4,
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
   }
-};
-
-const dataBar = {
-  labels: labelsHist,
-  datasets: [
-    {
-      label: "Total",
-      data: labelsHist.map(() => faker.datatype.number({ min: 0, max: 2000 })),
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)"
-    }
-  ]
-};
-
-const dataHist = {
-  labels: labelsHist,
-  datasets: [
-    {
-      borderColor: "black",
-      data: [10, 20, 30, 40],
-      borderWidth: 0.2,
-      barPercentage: 1,
-      categoryPercentage: 1,
-      hoverBackgroundColor: "darkgray",
-      barThickness: "flex",
-      backgroundColor: "rgba(255, 99, 132, 0.5)"
-    }
-  ]
 };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -112,67 +114,140 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-function createData(name: string, calories: number, fat: number) {
-  return { name, calories, fat };
-}
-
-const rows = [
-  createData("Pedro", 159, 2019),
-  createData("Gabriel", 237, 2019),
-  createData("Santiago", 262, 2021),
-  createData("Raul", 305, 2021)
-];
 
 const AsideMetrics2: FC = () => {
+
+  const [func, setFunc] = useState([
+    {
+      nombre_persona_evaluada: '',
+      anio: 0,
+      conteo_convocatorias: 0,
+      conteo_acusacion: 0,
+    }
+  ]);
+
+  const [funcPages, setFuncPages] = useState([
+    {
+      limit: 0,
+      page: 0,
+      totalDocs: 0,
+      totalPages: 0,
+    }
+  ]);
+
+  const [frec, setFrec] = useState([
+    {
+      key: 0,
+      value: 0
+    }
+  ]);
+
+  useEffect( () => {
+    axios.get('http://localhost:8000/api/funcionarios/sobrecargados?page=1').then(rest => {
+      console.log('resultado Sobrecargo: ', rest.data);
+      setFunc(rest.data.data.docs);
+      setFuncPages(rest.data.data.info);
+    });
+    axios.get('http://localhost:8000/api/convocatoria/frecuenciaAcusacion').then(rest => {
+      console.log('resultado Frecuencia: ', rest.data);
+      setFrec(rest.data.results);
+    });
+  }, []);  
+
+  const labels = ['0-10', '10-20','20-30','30-40','40-50','50-60','60-70','70-80','80-90','90-100'];
+
+  const dataHist = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Total",
+        data: frec,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        barPercentage: 1,
+        categoryPercentage: 1,
+        borderWidth: 0.2,
+      }
+    ]
+  };
+
+  function createData(name: string, year: number, count_convoc: number, count_acus: string) {
+    if (Number(count_acus) > 0) {
+      count_acus = 'SI';
+    }
+    else{
+      count_acus = 'NO';
+    }
+    return { name, year, count_convoc, count_acus };
+  }
+  
+  const rows = func.map(e => (
+    createData(e.nombre_persona_evaluada, e.anio, e.conteo_convocatorias, String(e.conteo_acusacion))
+  ));
+
   return (
     <Box sx={{ mt: 2.5 }} display="flex">
-      <Grid item xs={6}>
-        <Paper variant="outlined" sx={{ p: 1.5 }}>
-          <Typography variant="body2">
-            Funcionarios miembros de comite más sobrecargados
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 400 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Nombre</StyledTableCell>
-                    <StyledTableCell align="right">
-                      Convocatorias
-                    </StyledTableCell>
-                    <StyledTableCell align="right">Año</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.calories}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <a href={"https://www.google.com/"}>
-              En este enlace se puede encontrar la data completa
-            </a>
-          </Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={6}>
-        <Paper variant="outlined" sx={{ p: 1.5 }}>
-          <Typography variant="body2">
-            Porcentaje promedio de miembros con presunta responsabilidad por
-            convocatoria
-            <Bar options={optionsHist} data={dataBar} />
-            <a href={"https://www.google.com/"}>
-              En este enlace se puede encontrar la data completa
-            </a>
-          </Typography>
-        </Paper>
+      <Grid container spacing = {2}>
+        <Grid item xs={6}>
+          <Paper variant="outlined" sx={{ p: 1.5 }}>
+            <Typography variant="body2">
+              Funcionarios miembros de comite más sobrecargados
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 400 }} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Nombre</StyledTableCell>
+                      <StyledTableCell align="right">Año</StyledTableCell>
+                      <StyledTableCell align="right">Convocatorias</StyledTableCell>
+                      <StyledTableCell align="right">Acusado?</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <StyledTableRow key={row.name}>
+                        <StyledTableCell component="th" scope="row">
+                          {row.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {row.year}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {row.count_convoc}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {row.count_acus}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+
+                {/* <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  component="div"
+                  count={1000}
+                  rowsPerPage={10}
+                  
+                /> */}
+              </TableContainer>
+              <a href={"https://www.google.com/"}>
+                En este enlace se puede encontrar la data completa
+              </a>
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid  item xs={6}>
+          <Paper variant="outlined" sx={{ p: 1.5 }}>
+            <Typography  variant="body2">
+              Porcentaje promedio de miembros con presunta responsabilidad por
+              convocatoria
+              <Bar width={150} options={optionsHist} data={dataHist} />
+              <a href={"https://www.google.com/"}>
+                En este enlace se puede encontrar la data completa
+              </a>
+            </Typography>
+          </Paper>
+        </Grid>
       </Grid>
     </Box>
   );
