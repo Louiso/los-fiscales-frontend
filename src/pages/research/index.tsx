@@ -34,7 +34,7 @@ const HomePage: FC = () => {
             <MenuIcon />
           </IconButton> */}
           <Link to="/">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white' }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: 'none', color: 'white', fontSize: 20 }}>
               Anacoes Peru
             </Typography>
           </Link>
