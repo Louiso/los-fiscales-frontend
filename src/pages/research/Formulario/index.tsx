@@ -43,17 +43,20 @@ const Form: FC = () => {
     entidad: '',
     flag_miembro_comite: false,
     url_denunciado: '',
-    email_denunciante: ''
+    email_denunciante: '',
+    flag_terminos: false,
   });
 
-  const [emailField, setEmailField] = React.useState({
+  const [emailField, setEmailField] = useState({
     value: "",
     hasError: false,
   });
-  
-  const [alert, setAlert] = React.useState(false);
 
-  const [entidadShow, setEntidadShow] = useState('');
+  const [terminos, setTerminos] = useState('');
+  
+  const [alert, setAlert] = useState(false);
+
+  const [entidadShow, setEntidadShow] = useState('none');
   
   const handleSubmit = async (event:any) => {
     event.preventDefault();
@@ -68,27 +71,34 @@ const Form: FC = () => {
       miembro_comite: '',
       prueba_url: state.url_denunciado};
     
-    try {
-      const rest = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/denuncias/create`, payload);   
-      console.log('succes: ',rest);
-      setAlert(true);
-      setTimeout(() => {
+    if (state.flag_terminos){
+      try {
+        const rest = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/denuncias/create`, payload);   
+        console.log('succes: ',rest);
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000)
+        setTerminos('');
+        setState({
+          nombre_denunciado : '',
+          region : '',
+          flag_entidad : false,
+          entidad : '',
+          flag_miembro_comite : false,
+          url_denunciado : '',
+          email_denunciante : '',
+          flag_terminos: false
+        });
+      }
+      catch (error){
         setAlert(false);
-      }, 3000)
-      setState({
-        nombre_denunciado : '',
-        region : '',
-        flag_entidad : false,
-        entidad : '',
-        flag_miembro_comite : false,
-        url_denunciado : '',
-        email_denunciante : ''
-      });
+        console.log('error');
+      }
     }
-    catch (error){
-      setAlert(false);
-      console.log('error');
-    }
+    else{
+      setTerminos('Debe aceptar los términos y condiciones');
+    }   
   };
 
   const handleChange = (event: any) => {
@@ -100,11 +110,13 @@ const Form: FC = () => {
   console.log(state);
 
   const handleChecked = (event: any) => {
-    if (event.target.checked && event.target.name == 'flag_entidad'){
-      setEntidadShow('');
-    }
-    else{
-      setEntidadShow('none');
+    if (event.target.name == 'flag_entidad'){
+      if (event.target.checked && event.target.name == 'flag_entidad'){
+        setEntidadShow('');
+      }
+      else{
+        setEntidadShow('none');
+      }
     }
     setEntidadShow
     setState((prev)=>({
@@ -140,8 +152,8 @@ const Form: FC = () => {
         mb: 2
       }}
     >
-      <Typography className={heading} variant="h4">
-        Formulario de Registro de Presunto Implicado
+      <Typography sx={{mb: 5}} className={heading} variant="h3">
+        ¿Conoces algún acto de corrupción?
       </Typography>
       <form onSubmit={handleSubmit} >
         <Box display="flex" alignItems='center' sx={{mt: 2.5}}>
@@ -228,7 +240,7 @@ const Form: FC = () => {
           fontWeight: 'normal',
           mt: 2.5
         }}>
-          INFORMACIÓN DEL DENUNCIANTE
+          Déjanos tu correo para contactarte:
         </Typography>
         <TextField
           variant="outlined"
@@ -246,6 +258,23 @@ const Form: FC = () => {
           padding: 1
         }}>
           {emailField.hasError ? 'Ingrese un email válido' : ''}
+        </Typography>
+        <FormControlLabel
+          control={<Checkbox />}
+          label={
+            <a href="https://www.newadss.com/fotter?fbclid=IwAR26bjCE5aoKej38C2McwLfZtPnq7ZEZX_kyXnH9YaLrzRrJOHnXyhPpvGE" target="_blank" rel="noopener noreferrer">
+            {"Acepta los Términos y Condiciones"}
+          </a>}
+          // "Acepta los Términos y Condiciones"
+          checked={state.flag_terminos}
+          name='flag_terminos'
+          onChange={handleChecked}
+        />
+        <Typography sx={{
+          color: 'rgba(255, 0, 0)',
+          padding: 1
+        }}>
+          {terminos}
         </Typography>
         {alert ? (
           <Alert severity="success">Registro Exitoso</Alert>

@@ -13,6 +13,7 @@ import { Outlet } from "react-router-dom";
 import AsideMetrics from "./AsideMetrics";
 import AsideMetrics2 from "./AsideMetrics2";
 import Form from "./Formulario";
+import Footer from "./Footer";
 
 const HomePage: FC = () => {
   return (
@@ -59,6 +60,10 @@ const HomePage: FC = () => {
           </Grid>
         </Grid>
       </Container>
+      <footer >
+        <Footer />
+      </footer>
+      
     </div>
   );
 };
