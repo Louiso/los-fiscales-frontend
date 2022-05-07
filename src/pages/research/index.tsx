@@ -19,7 +19,11 @@ const HomePage: FC = () => {
   return (
     <div>
       <AppBar position="static" sx={{ backgroundColor: "primary" }}>
-        <Toolbar>
+        <Toolbar sx={{
+          '& > a': {
+            textDecoration: 'none',
+          }
+        }}>
           {/* <IconButton
             size="large"
             edge="start"
