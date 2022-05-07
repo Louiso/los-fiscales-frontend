@@ -13,7 +13,7 @@ const Footer: FC = () => {
         <Typography sx={{
           color: 'rgba(255, 255, 255)',
           backgroundColor: '#d44339',
-          padding: 1,
+          padding: 0.5,
           fontSize: '17px'
         }}>
           <p>
@@ -22,13 +22,13 @@ const Footer: FC = () => {
               DOCUMENTACIÓN DE APIS
             </a>
           </p>
-          <p>
+          <p style={{fontSize: '16px', color: '#DDD'}}>
           También puedes encontrar la información completa de la Data en el siguiente enlace:&nbsp;&nbsp; 
             <a style={{color: '#33ACFF', fontWeight: 'bold'}} href="https://drive.google.com/drive/folders/1BDwH4HFbMHc_Thzpn3i7V9-gRZPkJBzD?usp=sharing" target="_blank" rel="noopener noreferrer">
               DATA COMPLETA
             </a>
           </p>
-        </Typography>        
+        </Typography>
       </Grid>
     </div>
   );

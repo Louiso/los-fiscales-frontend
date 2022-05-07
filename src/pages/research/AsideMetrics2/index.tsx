@@ -193,7 +193,6 @@ const AsideMetrics2: FC = () => {
   )).filter(e => (
     anio ? String(e.year) === String(anio) : true
   ));
-  console.log('func: ', func);
 
   //PAGINACION
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -243,7 +242,7 @@ const AsideMetrics2: FC = () => {
                     <StyledTableCell>Nombre</StyledTableCell>
                     <StyledTableCell align="right">Año</StyledTableCell>
                     <StyledTableCell align="right">Convocatorias</StyledTableCell>
-                    <StyledTableCell align="right">¿Fue acusado ese año?</StyledTableCell>
+                    <StyledTableCell align="right">¿Ha tenido presuntas irregularidades?</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
