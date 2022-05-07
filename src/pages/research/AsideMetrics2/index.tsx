@@ -290,8 +290,8 @@ const AsideMetrics2: FC = () => {
             <Typography  variant="h6">
               Porcentaje promedio de miembros con presunta irregularidad por convocatoria
             </Typography>
-            <Typography  sx={{ fontSize: 12.5 }}>
-            Existen 161000 comites con menos del 10% de sus miembros con presuntas irregularidades. Se lee:
+            <Typography  sx={{ fontSize: 12.5, fontStyle: 'italic' }}>
+            Se lee: Existen 161101 comites con menos del 10% de sus miembros con presuntas irregularidades.
             </Typography>   
             <Bar width={150} options={optionsHist} data={dataHist} />
             <Typography sx={{mt: 2, display: 'block'}} variant="h6" component = "a" href={"https://docs.google.com/spreadsheets/d/1xNhOpEwyD7b3I_Dva1YE9M-rgUkO8Lkg/edit?fbclid=IwAR0BA3ooyD49Ea6jOlEt5myhm58c_yHsMnDNQCorSrLz4Bu640ryRZAyHPg#gid=516076021"} target="_blank" rel="noreferrer">
