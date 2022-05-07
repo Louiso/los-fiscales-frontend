@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import axios from 'axios'
 import {
   Grid,
@@ -13,7 +13,6 @@ import {
   TableRow,
   TableFooter,
   TablePagination,
-  FormControlLabel,
   InputLabel,
   Select,
   FormControl,
@@ -35,21 +34,7 @@ import {
   Legend
 } from "chart.js";
 
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useTheme } from '@mui/material/styles';
-
-
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  ArcElement,
   Title,
   Tooltip,
   Legend
@@ -135,6 +120,8 @@ const AsideMetrics2: FC = () => {
 
   const [anio, setAnio] = useState('');
 
+  const [flag, setFlag] = useState(true);
+
   const [func, setFunc] = useState([
     {
       nombre_persona_evaluada: '',
@@ -154,11 +141,9 @@ const AsideMetrics2: FC = () => {
   
   useEffect( () => {
     axios.get(`${import.meta.env.VITE_SERVER_URL}/api/funcionarios/sobrecargaAll`).then(rest => {
-      console.log('resultado Sobrecargo Todo: ', rest.data);
-      setFunc(rest.data.results.slice(0,100));
+      setFunc(rest.data.results);
     });
     axios.get(`${import.meta.env.VITE_SERVER_URL}/api/convocatoria/frecuenciaAcusacion`).then(rest => {
-      console.log('resultado Frecuencia: ', rest.data);
       setFrec(rest.data.results);
     });
   }, []);
@@ -188,11 +173,13 @@ const AsideMetrics2: FC = () => {
     return { name, year, count_convoc, count_acus };
   }
   
-  const rows = func.map(e => (
-    createData(e.nombre_persona_evaluada, e.anio, e.conteo_convocatorias, String(e.conteo_acusacion))
-  )).filter(e => (
-    anio ? String(e.year) === String(anio) : true
-  ));
+  const rows = useMemo(() => (
+    func.map(e => (
+      createData(e.nombre_persona_evaluada, e.anio, e.conteo_convocatorias, String(e.conteo_acusacion))
+    )).filter(e => (
+      anio ? String(e.year) === String(anio) : true
+    )).slice(0,100)
+  ), [anio, func])
 
   //PAGINACION
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -206,7 +193,12 @@ const AsideMetrics2: FC = () => {
 
   const handleChange = (event: any) => {
     setAnio(event.target.value); 
+    setFlag(false);
   };
+
+  useEffect( () => (
+    setFlag(true)
+  ), [anio])
 
   return (
     <Box sx={{ mt: 2.5 }} display="flex">
@@ -245,7 +237,9 @@ const AsideMetrics2: FC = () => {
                     <StyledTableCell align="right">¿Ha tenido presuntas irregularidades?</StyledTableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                {flag?(
+                  <>
+                  <TableBody>
                   {rows
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
@@ -283,6 +277,8 @@ const AsideMetrics2: FC = () => {
                     />
                   </TableRow>
                 </TableFooter>
+                  </>
+                ): null}
               </Table>
             </TableContainer>
             <Typography sx={{mt: 2, display: 'block'}} variant="h6" component = "a" href={"https://docs.google.com/spreadsheets/d/1DBMsYqudcCYSI60t2kKEf9zx0RYUEwTh/edit?rtpof=true&sd=true&fbclid=IwAR0a0KToOEST0Z75dog6E6-4-tXG_aNn4Qd1bmH-gQ5sYT-F0Mv5afZc4-s"} target="_blank" rel="noreferrer">
