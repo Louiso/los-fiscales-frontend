@@ -4,16 +4,8 @@ import {
   Grid,
   Box,
   Paper,
-  Typography,
-  Table,
-  TableBody,
-  TableContainer,
-  TableCell,
-  TableHead,
-  TableRow
+  Typography
 } from "@mui/material";
-import { tableCellClasses } from "@mui/material/TableCell";
-import { styled } from "@mui/material/styles";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -27,7 +19,6 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
-import { faker } from "@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -107,14 +98,14 @@ const AsideMetrics: FC = () => {
 
   //Entidades
   useEffect( () => {
-    axios.get('http://localhost:8000/api/acusados_entidades/miembros').then(rest => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/acusados_entidades/miembros`).then(rest => {
       console.log('resultado: ', rest.data);
       setEntidad(rest.data.results.slice(0, 10));
     });
   }, []);
 
   useEffect( () => {
-    axios.get('http://localhost:8000/api/acusados_entidades').then(rest => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/acusados_entidades`).then(rest => {
       // console.log('resultado: ', rest.data);
       setEntidadTotal(rest.data.results.slice(0, 10));
     });
@@ -122,14 +113,14 @@ const AsideMetrics: FC = () => {
 
   //Regiones
   useEffect( () => {
-    axios.get('http://localhost:8000/api/acusados_lugar/miembros').then(rest => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/acusados_lugar/miembros`).then(rest => {
       // console.log('resultado: ', rest.data);
       setRegion(rest.data.results.slice(0, 10));
     });
   }, []);
 
   useEffect( () => {
-    axios.get('http://localhost:8000/api/acusados_lugar').then(rest => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/acusados_lugar`).then(rest => {
       // console.log('resultado: ', rest.data);
       setRegionTotal(rest.data.results.slice(0, 10));
     });

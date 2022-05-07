@@ -11,7 +11,6 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TablePagination
 } from "@mui/material";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
@@ -28,7 +27,6 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
-import { faker } from "@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -41,8 +39,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-const labelsHist = [0.75, 1.25, 1.75, 2.25];
 
 const optionsHist = {
   indexAxis: "x" as const,
@@ -94,6 +90,9 @@ const optionsHist = {
   }
 };
 
+const labels = ['0-10', '10-20','20-30','30-40','40-50','50-60','60-70','70-80','80-90','90-100'];
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -126,15 +125,6 @@ const AsideMetrics2: FC = () => {
     }
   ]);
 
-  const [funcPages, setFuncPages] = useState([
-    {
-      limit: 0,
-      page: 0,
-      totalDocs: 0,
-      totalPages: 0,
-    }
-  ]);
-
   const [frec, setFrec] = useState([
     {
       key: 0,
@@ -143,18 +133,16 @@ const AsideMetrics2: FC = () => {
   ]);
 
   useEffect( () => {
-    axios.get('http://localhost:8000/api/funcionarios/sobrecargados?page=1').then(rest => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/funcionarios/sobrecargados?page=1`).then(rest => {
       console.log('resultado Sobrecargo: ', rest.data);
       setFunc(rest.data.data.docs);
-      setFuncPages(rest.data.data.info);
     });
-    axios.get('http://localhost:8000/api/convocatoria/frecuenciaAcusacion').then(rest => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/convocatoria/frecuenciaAcusacion`).then(rest => {
       console.log('resultado Frecuencia: ', rest.data);
       setFrec(rest.data.results);
     });
   }, []);  
 
-  const labels = ['0-10', '10-20','20-30','30-40','40-50','50-60','60-70','70-80','80-90','90-100'];
 
   const dataHist = {
     labels: labels,

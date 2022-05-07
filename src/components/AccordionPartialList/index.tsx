@@ -90,9 +90,6 @@ const AccordionPartialList: FC<AccordionPartialListProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log("totalChildren", totalChildren)
-  console.log("hasMoreRows", hasMoreRows)
-
   return (
     <div className={className}>
       <div className={classes.summary}>{title}</div>

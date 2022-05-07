@@ -17,20 +17,11 @@ import {
   Checkbox,
   Button,
   Grid,
-  rgbToHex,
   Alert
 } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
-import { fontWeight, padding } from "@mui/system";
 
-interface IFormInput {
-  email: string;
-  firstName: string;
-  password: string;
-}
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   heading: {
     textAlign: "center"
   },
@@ -61,7 +52,6 @@ const Form: FC = () => {
   
   const [alert, setAlert] = React.useState(false);
 
-  const [checked, setChecked] = useState(false);
   const [entidadShow, setEntidadShow] = useState('');
   
   const handleSubmit = async (event:any) => {
@@ -78,7 +68,7 @@ const Form: FC = () => {
       prueba_url: state.url_denunciado};
     
     try {
-      const rest = await axios.post('http://localhost:8000/api/denuncias/create', payload);   
+      const rest = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/denuncias/create`, payload);   
       console.log('succes: ',rest);
       setAlert(true);
       setTimeout(() => {
@@ -143,7 +133,7 @@ const Form: FC = () => {
     <Box
       sx={{
         backgroundColor: "white",
-        p: 1.5,
+        p: 2.5,
         mt: 5,
         mb: 2
       }}
@@ -153,67 +143,71 @@ const Form: FC = () => {
         Formulario de Registro de Presunto Implicado
       </Typography>
       <form onSubmit={handleSubmit} >
-        <TextField sx={{ marginTop: 1,
-          marginBottom: 2}}
-          variant="outlined"
-          label="Nombre del Personaje Implicado"
-          value = {state.nombre_denunciado}
-          name = 'nombre_denunciado'
-          onChange={handleChange}
-          fullWidth
-          required
-        />
-        <FormControl sx={{ width: 200 }} >
-          <InputLabel id="demo-simple-select-label">Región</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value = {state.region}
-            label="Región"
-            name = 'region'
-            onChange={handleChange} 
-            MenuProps={{ 
-              PaperProps: {
-                sx: {
-                  height: 200,
-                },
-              },
-            }}
+        <Box display="flex" alignItems='center' sx={{mt: 1.5}}>
+          <TextField
+            variant="outlined"
+            label="Nombre del Personaje Implicado"
+            value = {state.nombre_denunciado}
+            name = 'nombre_denunciado'
+            onChange={handleChange}
+            fullWidth
             required
-          >
-            {ubigeo.getDepartments().map((department)=>(
-              <MenuItem value={department.name} key={department.name}>{department.name}</MenuItem>      
-            ))}
-          </Select>
-        </FormControl>
+          />
+          
+          <FormControl sx={{ width: 200, ml: 1.5 }} >
+            <InputLabel id="demo-simple-select-label">Región</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value = {state.region}
+              label="Región"
+              name = 'region'
+              onChange={handleChange} 
+              MenuProps={{ 
+                PaperProps: {
+                  sx: {
+                    height: 200,
+                  },
+                },
+              }}
+              required
+            >
+              {ubigeo.getDepartments().map((department)=>(
+                <MenuItem value={department.name} key={department.name}>{department.name}</MenuItem>      
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+        
+        <Box display="flex" alignItems='center' sx={{mt: 1.5}}>
+          <FormControlLabel
+            control={(
+              <Checkbox 
+                onChange={handleChecked}
+                checked = {state.flag_entidad}
+                name='flag_entidad' />
+            )}
+            label="¿Pertenece a una Entidad?"
+          />
+
+          <TextField
+            sx={{ width: 400, display: entidadShow }}
+            variant="outlined"
+            // margin="normal"
+            label="Entidad"
+            value = {state.entidad}
+            name = 'entidad'
+            onChange={handleChange}
+            fullWidth
+            required = {state.flag_entidad}
+          />
+        </Box>
 
         <FormControlLabel
-          sx={{ p: 1 }}
-          control={<Checkbox 
-            onChange={handleChecked}
-            checked = {state.flag_entidad}
-            name = 'flag_entidad' />}
-          label="Pertenece a una Entidad?"
-        />
-
-        <TextField
-          sx={{ width: 400, display: entidadShow }}
-          variant="outlined"
-          // margin="normal"
-          label="Entidad"
-          value = {state.entidad}
-          name = 'entidad'
-          onChange={handleChange}
-          fullWidth
-          required = {state.flag_entidad}
-        />
-
-        <FormControlLabel
-          sx={{ p: 1 }}
           control={<Checkbox />}
-          label="Es Miembro de Comite?"
-          checked = {state.flag_miembro_comite}
-          name = 'flag_miembro_comite'
+          label="¿Es Miembro de Comité?"
+          checked={state.flag_miembro_comite}
+          name='flag_miembro_comite'
           onChange={handleChecked}
         />
 
@@ -222,8 +216,8 @@ const Form: FC = () => {
           margin="normal"
           label="Link de Evidencia"
           type="text"
-          value = {state.url_denunciado}
-          name = 'url_denunciado'
+          value={state.url_denunciado}
+          name='url_denunciado'
           onChange={handleChange}
           fullWidth
           required
@@ -233,14 +227,16 @@ const Form: FC = () => {
           fontWeight: 'normal',
           marginLeft: 1,
           marginTop: 1
-        }}>INFORMACIÓN DEL DENUNCIANTE</Typography>
+        }}>
+          INFORMACIÓN DEL DENUNCIANTE
+        </Typography>
         <TextField
           variant="outlined"
           margin="normal"
           label="Email (Opcional)"
           type="email"
-          value = {state.email_denunciante}
-          name = 'email_denunciante'
+          value={state.email_denunciante}
+          name='email_denunciante'
           onChange={handleChange}
           onBlur={handleBlur} 
           fullWidth
@@ -251,10 +247,10 @@ const Form: FC = () => {
         }}>
           {emailField.hasError ? 'Ingrese un email válido' : ''}
         </Typography>
-        {!alert ? (
-          ''
-        ) : (
+        {alert ? (
           <Alert severity="success">Registro Exitoso</Alert>
+        ) : (
+          ''
         )}
         <Grid textAlign='center' marginTop={3}>
           <Button
@@ -267,7 +263,6 @@ const Form: FC = () => {
           >
             ENVIAR
           </Button>
-          
           
         </Grid>
       </form>
