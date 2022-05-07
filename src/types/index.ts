@@ -47,6 +47,9 @@ export interface Presunto {
   provincia: string;
   distrito: string;
   fecha_emision: string;
+  url_resumen: string;
+  url_informe: string;
+  titulo: string;
 }
 
 export interface Irregulars {

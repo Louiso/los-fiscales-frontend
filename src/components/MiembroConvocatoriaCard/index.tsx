@@ -9,6 +9,7 @@ import {
 import MaybeTooltip from "components/MaybeTooltip";
 // import IrregularCard from "components/IrregularCard";
 import ConvocatoriaCard from "components/ConvocatoriaCard";
+import InformeControlCard from 'components/InformeControlCard'
 import AccordionPartialList from "components/AccordionPartialList";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 interface MiembroConvocatoriaCardProps {
@@ -80,6 +81,17 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
           N° proyectos con presuntas irregularidades:&nbsp;
           {miembro.presuntos.length}
         </Typography>
+        {Boolean(miembro.presuntos && miembro.presuntos.length) && (
+          <AccordionPartialList
+            disabledVisibilityIdent
+            display="flex"
+            getLabel={(expanded, restTotalChildren) => expanded ? 'Ver menos' : `Ver ${restTotalChildren} informe${restTotalChildren === 1 ? '' : 's'} más`}
+            title={'Informes de control con presuntas responsabilidades'}>
+            {miembro.presuntos!.map((presunto) => (
+              <InformeControlCard key={presunto.num_inform} presunto={presunto} sx={{height: '100%'}} />
+            ))}
+          </AccordionPartialList>
+        )}
         {Boolean(miembro.convocatorias && miembro.convocatorias.length) && (
           <AccordionPartialList
             disabledVisibilityIdent
