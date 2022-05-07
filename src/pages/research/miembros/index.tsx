@@ -114,7 +114,7 @@ const Miembros: FC = () => {
               backgroundColor: "white"
             }
           }}
-          placeholder="Nombres de Funcionario"
+          placeholder="Nombres de Miembro de Convocatorias"
         />
         <FormControl sx={{ ml: 1, width: 320 }}>
           <InputLabel id="demo-simple-select-label">Ordenar por:</InputLabel>

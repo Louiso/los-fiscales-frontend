@@ -9,6 +9,7 @@ import {
 import MaybeTooltip from "components/MaybeTooltip";
 // import IrregularCard from "components/IrregularCard";
 import ConvocatoriaCard from "components/ConvocatoriaCard";
+import AccordionPartialList from "components/AccordionPartialList";
 
 interface MiembroConvocatoriaCardProps {
   miembro: MiembroConvocatoria;
@@ -75,21 +76,15 @@ const MiembroConvocatoriaCard: FC<MiembroConvocatoriaCardProps> = ({
           {miembro.presuntos.length}
         </Typography>
         {Boolean(miembro.convocatorias && miembro.convocatorias.length) && (
-          <>
-            <Typography variant="h6" component="div" sx={{ mt: 1.5 }}>Ultimas convocatorias:</Typography>
-            <Box
-              sx={{
-                display: "grid",
-                mt: 1.5,
-                gridTemplateColumns: "1fr 1fr 1fr",
-                gridGap: "8px"
-              }}
-            >
-              {miembro.convocatorias!.map((convocatoria) => (
-                <ConvocatoriaCard key={convocatoria.codigo_convocatoria} convocatoria={convocatoria} />
-              ))}
-            </Box>
-          </>
+          <AccordionPartialList
+            disabledVisibilityIdent
+            display="flex"
+            getLabel={(expanded, restTotalChildren) => expanded ? 'Ver menos' : `Ver ${restTotalChildren} experiencia${restTotalChildren === 1 ? '' : 's'} más`}
+            title={`${miembro.convocatorias.length >= 12 ? 12: miembro.convocatorias.length} Ultimas convocatorias:`}>
+            {miembro.convocatorias!.map((convocatoria) => (
+              <ConvocatoriaCard key={convocatoria.codigo_convocatoria} convocatoria={convocatoria} sx={{height: '100%'}} />
+            ))}
+          </AccordionPartialList>
         )}
         {/* <Box
           sx={{

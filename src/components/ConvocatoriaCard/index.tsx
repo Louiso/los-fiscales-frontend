@@ -7,14 +7,15 @@ import React, { FC } from 'react'
 import { Convocatoria } from 'types'
 
 interface ConvocatoriaCardProps {
-  convocatoria: Convocatoria
+  convocatoria: Convocatoria;
+  sx?: any;
 }
 
-const ConvocatoriaCard: FC<ConvocatoriaCardProps> = ({ convocatoria }) => {
+const ConvocatoriaCard: FC<ConvocatoriaCardProps> = ({ convocatoria, sx }) => {
   const classes = useStyles()
 
   return (
-    <Card variant='outlined'>
+    <Card variant='outlined' sx={sx}>
       <CardHeader
         sx={{p: 1.5, pb: 0}}
         title={
@@ -53,7 +54,7 @@ const useStyles = makeStyles(() => ({
     marginTop: '2px !important'
   },
   title: {
-    width: 200,
+    width: 166,
     'white-space': 'nowrap',
     overflow: 'hidden',
     'text-overflow': 'ellipsis'
