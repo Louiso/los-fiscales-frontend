@@ -5,7 +5,7 @@ export enum SortByMemberOptionKey {
   AdmEnt = 'adm_ent',
   Civil = 'civil',
   AdmPas = 'adm_pas',
-  FrePartConv = "fre-part-conv"
+  FrePartConv = "convocatorias"
 }
 
 export const SortByMemberOptions = [
@@ -17,12 +17,12 @@ export const SortByMemberOptions = [
     value: SortByMemberOptionKey.Admin,
     label: "Presunta Resp. Administrativa"
   },
-  // {
-  //   value: SortByMemberOptionKey.PreRespTotal,
-  //   label: "Presunta Resp. Total"
-  // },
-  // {
-  //   value: SortByMemberOptionKey.FrePartConv,
-  //   label: "Frecuente Partición en Convocatorias"
-  // }
+  {
+    value: SortByMemberOptionKey.Civil,
+    label: "Presunta Resp. Civil"
+  },
+  {
+    value: SortByMemberOptionKey.FrePartConv,
+    label: "Frecuente Partición en Convocatorias"
+  }
 ];
