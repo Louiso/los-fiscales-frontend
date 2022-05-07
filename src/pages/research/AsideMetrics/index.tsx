@@ -44,8 +44,7 @@ const optionsEntidad = {
     legend: {
       position: "top" as const
     }
-  },
-  
+  }
 };
 
 const optionsRegion = {
