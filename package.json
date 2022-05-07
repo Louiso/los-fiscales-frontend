@@ -8,7 +8,6 @@
     "lint": "eslint --fix .",
     "checkup": "npm run typecheck && npm run format && npm run lint",
     "build": "vite build",
-    "postbuild": "cp _redirects ./dist/_redirects",
     "serve": "vite preview",
     "prepare": "husky install"
   },
